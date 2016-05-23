@@ -21,12 +21,14 @@
   <ItemGroup>
     <ClCompile Include="application\application.cc" />
     <ClCompile Include="application\system\levelsystem.cc" />
+    <ClCompile Include="application\system\interpretersystem.cc" />
     <ClCompile Include="main.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\application.h" />
     <ClInclude Include="application\component\level.h" />
     <ClInclude Include="application\system\levelsystem.h" />
+    <ClInclude Include="application\system\interpretersystem.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C9D0450B-FECC-4931-A359-4B677FA59979}</ProjectGuid>

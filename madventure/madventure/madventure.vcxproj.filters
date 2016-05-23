@@ -23,6 +23,7 @@
       <Filter>Application\System</Filter>
     </ClCompile>
     <ClCompile Include="main.cc" />
+    <ClCompile Include="application\system\interpretersystem.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\component\level.h">
@@ -34,5 +35,6 @@
     <ClInclude Include="application\system\levelsystem.h">
       <Filter>Application\System</Filter>
     </ClInclude>
+    <ClInclude Include="application\system\interpretersystem.h" />
   </ItemGroup>
 </Project>
