@@ -1,5 +1,4 @@
-#ifndef MADVENTURE_APPLICATION_SYSTEM_GAMESYSTEM_H_
-#define MADVENTURE_APPLICATION_SYSTEM_GAMESYSTEM_H_
+#pragma once
 
 #include "entityx/entityx.h"
 #include "../event/gamequit.h"
@@ -23,5 +22,3 @@ public:
 private:
   bool finished_;
 };
-
-#endif // MADVENTURE_APPLICATION_SYSTEM_GAMESYSTEM_H_

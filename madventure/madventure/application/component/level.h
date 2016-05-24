@@ -1,10 +1,13 @@
-#ifndef MADVENTURE_APPLICATION_COMPONENT_LEVEL_H_
-#define MADVENTURE_APPLICATION_COMPONENT_LEVEL_H_
+#pragma once
+
+#include "area.h"
+#include "../graph/SparseGraph.h"
+#include "../graph/GraphNodeTypes.h"
+#include "../graph/GraphEdgeTypes.h"
 
 struct Level {
-  explicit Level(int x_size, int y_size) : x_size(x_size), y_size(y_size) {}
+  explicit Level(SparseGraph<NavGraphNode<Area>, NavGraphEdge> graph)
+    : graph_(graph) {}
 
-  int x_size, y_size;
+  SparseGraph<NavGraphNode<Area>, NavGraphEdge> graph_;
 };
-
-#endif // MADVENTURE_APPLICATION_COMPONENT_LEVEL_H_

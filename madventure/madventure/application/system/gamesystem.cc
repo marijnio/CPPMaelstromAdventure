@@ -2,11 +2,13 @@
 #include <string>
 
 #include "gamesystem.h"
+#include "../event/createlevel.h"
 
 using namespace std;
 
 void GameSystem::configure(ex::EventManager &events) {
   events.subscribe<GameQuit>(*this);
+  events.emit<CreateLevel>();
 }
 
 void GameSystem::update(ex::EntityManager & es, ex::EventManager & events,

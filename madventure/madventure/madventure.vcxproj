@@ -27,11 +27,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\application.h" />
+    <ClInclude Include="application\component\area.h" />
     <ClInclude Include="application\component\level.h" />
     <ClInclude Include="application\event\gamequit.h" />
+    <ClInclude Include="application\graph\AStarHeuristicPolicies.h" />
+    <ClInclude Include="application\graph\GraphAlgorithms.h" />
+    <ClInclude Include="application\graph\GraphEdgeTypes.h" />
+    <ClInclude Include="application\graph\GraphNodeTypes.h" />
+    <ClInclude Include="application\graph\HandyGraphFunctions.h" />
+    <ClInclude Include="application\graph\NodeTypeEnumerations.h" />
+    <ClInclude Include="application\graph\SparseGraph.h" />
     <ClInclude Include="application\system\gamesystem.h" />
     <ClInclude Include="application\system\levelsystem.h" />
     <ClInclude Include="application\system\interpretersystem.h" />
+    <ClInclude Include="application\utility\mathoperations.h" />
+    <ClInclude Include="application\utility\priorityqueue.h" />
+    <ClInclude Include="application\utility\vector2d.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C9D0450B-FECC-4931-A359-4B677FA59979}</ProjectGuid>
@@ -104,9 +115,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\libraries\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)\..\..\libraries\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;entityx.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

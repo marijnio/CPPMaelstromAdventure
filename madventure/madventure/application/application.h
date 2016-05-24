@@ -1,5 +1,4 @@
-#ifndef MADVENTURE_APPLICATION_H_
-#define MADVENTURE_APPLICATION_H_
+#pragma once
 
 #include "entityx/entityx.h"
 #include "system/gamesystem.h"
@@ -14,5 +13,3 @@ public:
 
   bool is_finished() { return systems.system<GameSystem>()->is_finished(); }
 };
-
-#endif // MADVENTURE_APPLICATION_H_

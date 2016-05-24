@@ -1,5 +1,4 @@
-#ifndef MADVENTURE_APPLICATION_SYSTEM_INTERPRETERSYSTEM_H_
-#define MADVENTURE_APPLICATION_SYSTEM_INTERPRETERSYSTEM_H_
+#pragma once
 
 #include "entityx/entityx.h"
 
@@ -12,5 +11,3 @@ public:
   void update(ex::EntityManager &es, ex::EventManager &events,
               ex::TimeDelta dt);
 };
-
-#endif // MADVENTURE_APPLICATION_SYSTEM_INTERPRETERSYSTEM_H_
