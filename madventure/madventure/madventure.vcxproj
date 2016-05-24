@@ -29,6 +29,7 @@
     <ClInclude Include="application\application.h" />
     <ClInclude Include="application\component\area.h" />
     <ClInclude Include="application\component\level.h" />
+    <ClInclude Include="application\event\createlevel.h" />
     <ClInclude Include="application\event\gamequit.h" />
     <ClInclude Include="application\graph\AStarHeuristicPolicies.h" />
     <ClInclude Include="application\graph\GraphAlgorithms.h" />
