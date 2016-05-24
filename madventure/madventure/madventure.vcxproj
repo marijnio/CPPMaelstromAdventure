@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\application.cc" />
+    <ClCompile Include="application\system\gamesystem.cc" />
     <ClCompile Include="application\system\levelsystem.cc" />
     <ClCompile Include="application\system\interpretersystem.cc" />
     <ClCompile Include="main.cc" />
@@ -27,6 +28,8 @@
   <ItemGroup>
     <ClInclude Include="application\application.h" />
     <ClInclude Include="application\component\level.h" />
+    <ClInclude Include="application\event\gamequit.h" />
+    <ClInclude Include="application\system\gamesystem.h" />
     <ClInclude Include="application\system\levelsystem.h" />
     <ClInclude Include="application\system\interpretersystem.h" />
   </ItemGroup>

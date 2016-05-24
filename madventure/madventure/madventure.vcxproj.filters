@@ -24,6 +24,7 @@
     </ClCompile>
     <ClCompile Include="main.cc" />
     <ClCompile Include="application\system\interpretersystem.cc" />
+    <ClCompile Include="application\system\gamesystem.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\component\level.h">
@@ -36,5 +37,7 @@
       <Filter>Application\System</Filter>
     </ClInclude>
     <ClInclude Include="application\system\interpretersystem.h" />
+    <ClInclude Include="application\system\gamesystem.h" />
+    <ClInclude Include="application\event\gamequit.h" />
   </ItemGroup>
 </Project>

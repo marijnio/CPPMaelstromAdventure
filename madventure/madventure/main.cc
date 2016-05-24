@@ -1,5 +1,9 @@
-#include "entityx\entityx.h"
-#include "application\application.h"
+#define CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
+#include "entityx/entityx.h"
+#include "application/application.h"
 
 int main(int args[]) {
   
@@ -7,9 +11,11 @@ int main(int args[]) {
 
   std::cout << "Welcome to Maelstrom Adventure.\n";
 
-  while (true) {
+  do {
     app.update(NULL);
-  }
+  } while (!app.is_finished());
+
+  _CrtDumpMemoryLeaks();
 
   return 0;
 }

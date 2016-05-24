@@ -1,16 +1,16 @@
 #ifndef MADVENTURE_APPLICATION_SYSTEM_INTERPRETERSYSTEM_H_
 #define MADVENTURE_APPLICATION_SYSTEM_INTERPRETERSYSTEM_H_
 
-#include "entityx\entityx.h"
+#include "entityx/entityx.h"
 
 namespace ex = entityx;
 
-class InterpreterSystem : public entityx::System<InterpreterSystem> {
+class InterpreterSystem : public ex::System<InterpreterSystem> {
 public:
-  explicit InterpreterSystem();
+  explicit InterpreterSystem() {};
 
-  void update(entityx::EntityManager &es, entityx::EventManager &events,
-              entityx::TimeDelta dt);
+  void update(ex::EntityManager &es, ex::EventManager &events,
+              ex::TimeDelta dt);
 };
 
 #endif // MADVENTURE_APPLICATION_SYSTEM_INTERPRETERSYSTEM_H_

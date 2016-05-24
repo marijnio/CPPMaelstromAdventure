@@ -2,11 +2,9 @@
 #include <string>
 
 #include "interpretersystem.h"
+#include "../event/gamequit.h"
 
 using namespace std;
-
-InterpreterSystem::InterpreterSystem() {
-}
 
 void InterpreterSystem::update(ex::EntityManager & es,
                                ex::EventManager & events, ex::TimeDelta dt) {
@@ -14,4 +12,7 @@ void InterpreterSystem::update(ex::EntityManager & es,
   cout << "\n>";
   getline(cin, mystr);
   cout << "You said " << mystr << ".\n";
+  if (mystr == "quit") {
+    events.emit<GameQuit>();
+  }
 }
