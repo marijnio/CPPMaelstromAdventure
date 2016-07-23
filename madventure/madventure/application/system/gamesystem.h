@@ -15,12 +15,13 @@ public:
   void update(ex::EntityManager &es, ex::EventManager &events,
               ex::TimeDelta dt);
 
-  void receive(const GameQuit &gamequit);
+  void initialize(ex::EntityManager &es,ex::EventManager &events);
 
-  void receive(const ex::EntityCreatedEvent & entity_created_event);
+  void receive(const GameQuit &gamequit);
 
   bool is_finished() { return finished_; }
 
 private:
   bool finished_;
+  bool initialized_ = false;
 };

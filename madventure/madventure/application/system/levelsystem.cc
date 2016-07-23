@@ -25,15 +25,17 @@ ex::Entity LevelSystem::createLevel(ex::EntityManager & es) {
   // Create non-directed navigation graph.
   auto graph = new SparseGraph<NavGraphNode<ex::Entity*>, NavGraphEdge>(false);
 
-  GraphHelper_CreateGrid(*graph, 3, 3, 3, 3, false);
+  GraphHelper_CreateGrid(*graph, 4, 4, 4, 4, false);
 
-  level.assign<Level>(graph);
+  level.assign<Level>(*graph);
 
   cout << "edges: " << graph->NumEdges() << "; nodes: " << graph->NumNodes()
     << endl;
 
-  for (int i = 0; i < graph->NumNodes(); i++) {
-    NavGraphNode<ex::Entity*> current_node = graph->GetNode(i);
+  ex::ComponentHandle<Level> level_handle = level.component<Level>();
+  auto obtained_graph = level_handle->graph;
+  for (int i = 0; i < obtained_graph->NumNodes(); i++) {
+    NavGraphNode<ex::Entity*> current_node = obtained_graph->GetNode(i);
     ex::Entity area = es.create();
     area.assign<Area>(current_node);
     current_node.SetExtraInfo(&area);

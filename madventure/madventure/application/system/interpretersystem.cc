@@ -16,7 +16,4 @@ void InterpreterSystem::update(ex::EntityManager &es,
   if (mystr == "quit") {
     events.emit<GameQuit>();
   }
-  if (mystr == "create") {
-    events.emit<CreateLevelEvent>(es);
-  }
 }

@@ -51,5 +51,7 @@
     <ClInclude Include="application\utility\mathoperations.h" />
     <ClInclude Include="application\utility\priorityqueue.h" />
     <ClInclude Include="application\event\createlevelevent.h" />
+    <ClInclude Include="application\component\player.h" />
+    <ClInclude Include="application\component\location.h" />
   </ItemGroup>
 </Project>

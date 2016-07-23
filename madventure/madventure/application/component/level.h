@@ -8,8 +8,8 @@
 #include "../graph/GraphEdgeTypes.h"
 
 struct Level {
-  explicit Level(SparseGraph<NavGraphNode<ex::Entity*>, NavGraphEdge> graph)
-      : graph(graph) {}
+  explicit Level(SparseGraph<NavGraphNode<ex::Entity*>, NavGraphEdge> &graph)
+      : graph(&graph) {}
 
-  SparseGraph<NavGraphNode<ex::Entity*>, NavGraphEdge> graph;
+  SparseGraph<NavGraphNode<ex::Entity*>, NavGraphEdge>* graph;
 };
