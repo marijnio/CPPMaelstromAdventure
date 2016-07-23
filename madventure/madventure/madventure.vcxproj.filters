@@ -50,6 +50,6 @@
     <ClInclude Include="application\utility\vector2d.h" />
     <ClInclude Include="application\utility\mathoperations.h" />
     <ClInclude Include="application\utility\priorityqueue.h" />
-    <ClInclude Include="application\event\createlevel.h" />
+    <ClInclude Include="application\event\createlevelevent.h" />
   </ItemGroup>
 </Project>

@@ -17,6 +17,8 @@ public:
 
   void receive(const GameQuit &gamequit);
 
+  void receive(const ex::EntityCreatedEvent & entity_created_event);
+
   bool is_finished() { return finished_; }
 
 private:

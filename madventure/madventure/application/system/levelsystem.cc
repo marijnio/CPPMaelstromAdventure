@@ -9,7 +9,7 @@
 using namespace std;
 
 void LevelSystem::configure(ex::EventManager &events) {
-  events.subscribe<CreateLevel>(*this);
+  events.subscribe<CreateLevelEvent>(*this);
 }
 
 void LevelSystem::update(ex::EntityManager & es, ex::EventManager & events,
@@ -33,7 +33,7 @@ ex::Entity LevelSystem::createLevel(ex::EntityManager & es) {
   return level;
 }
 
-void LevelSystem::receive(const CreateLevel &createlevel) {
+void LevelSystem::receive(const CreateLevelEvent& create_level_event) {
   std::cout << "Creating level.\n" << std::endl;
-  createlevel()
+  createLevel(create_level_event.es_);
 }

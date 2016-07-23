@@ -208,24 +208,24 @@ void WeightNavGraphNodeEdges(graph_type& graph, int node, double weight)
 // in a graph to every other
 //-----------------------------------------------------------------------------
 template <class graph_type>
-std::vector<std::vector<int> > CreateAllPairsTable(const graph_type& G)
+std::vector<std::vector<int> > CreateAllPairsTable(const graph_type& my_graph)
 {
   enum {no_path = -1};
   
-  std::vector<int> row(G.NumNodes(), no_path);
+  std::vector<int> row(my_graph.NumNodes(), no_path);
   
-  std::vector<std::vector<int> > ShortestPaths(G.NumNodes(), row);
+  std::vector<std::vector<int> > ShortestPaths(my_graph.NumNodes(), row);
 
-  for (int source=0; source<G.NumNodes(); ++source)
+  for (int source=0; source<my_graph.NumNodes(); ++source)
   {
     //calculate the SPT for this node
-    Graph_SearchDijkstra<graph_type> search(G, source);
+    Graph_SearchDijkstra<graph_type> search(my_graph, source);
 
     std::vector<const graph_type::EdgeType*> spt = search.GetSPT();
 
     //now we have the SPT it's easy to work backwards through it to find
     //the shortest paths from each node to this source node
-    for (int target = 0; target<G.NumNodes(); ++target)
+    for (int target = 0; target<my_graph.NumNodes(); ++target)
     {
       //if the source node is the same as the target just set to target
       if (source == target)
@@ -257,20 +257,20 @@ std::vector<std::vector<int> > CreateAllPairsTable(const graph_type& G)
 //  node to every other
 //-----------------------------------------------------------------------------
 template <class graph_type>
-std::vector<std::vector<double> > CreateAllPairsCostsTable(const graph_type& G)
+std::vector<std::vector<double> > CreateAllPairsCostsTable(const graph_type& my_graph)
 {
   //create a two dimensional vector
-  std::vector<double> row(G.NumNodes(), 0.0);
-  std::vector<std::vector<double> > PathCosts(G.NumNodes(), row);
+  std::vector<double> row(my_graph.NumNodes(), 0.0);
+  std::vector<std::vector<double> > PathCosts(my_graph.NumNodes(), row);
 
-  for (int source=0; source<G.NumNodes(); ++source)
+  for (int source=0; source<my_graph.NumNodes(); ++source)
   {
     //do the search
-    Graph_SearchDijkstra<graph_type> search(G, source);
+    Graph_SearchDijkstra<graph_type> search(my_graph, source);
 
     //iterate through every node in the graph and grab the cost to travel to
     //that node
-    for (int target = 0; target<G.NumNodes(); ++target)
+    for (int target = 0; target<my_graph.NumNodes(); ++target)
     {
       if (source != target)
       {
@@ -291,23 +291,23 @@ std::vector<std::vector<double> > CreateAllPairsCostsTable(const graph_type& G)
 //  other factors such as terrain type, gradients etc)
 //------------------------------------------------------------------------------
 template <class graph_type>
-double CalculateAverageGraphEdgeLength(const graph_type& G)
+double CalculateAverageGraphEdgeLength(const graph_type& my_graph)
 {
   double TotalLength = 0;
   int NumEdgesCounted = 0;
 
-  graph_type::ConstNodeIterator NodeItr(G);
+  graph_type::ConstNodeIterator NodeItr(my_graph);
   const graph_type::NodeType* pN;
   for (pN = NodeItr.begin(); !NodeItr.end(); pN=NodeItr.next())
   {
-    graph_type::ConstEdgeIterator EdgeItr(G, pN->Index());
+    graph_type::ConstEdgeIterator EdgeItr(my_graph, pN->Index());
     for (const graph_type::EdgeType* pE = EdgeItr.begin(); !EdgeItr.end(); pE=EdgeItr.next())
     {
       //increment edge counter
       ++NumEdgesCounted;
 
       //add length of edge to total length
-      TotalLength += Vec2DDistance(G.GetNode(pE->From()).Pos(), G.GetNode(pE->To()).Pos());
+      TotalLength += Vec2DDistance(my_graph.GetNode(pE->From()).Pos(), my_graph.GetNode(pE->To()).Pos());
     }
   }
 
@@ -319,15 +319,15 @@ double CalculateAverageGraphEdgeLength(const graph_type& G)
 //  returns the cost of the costliest edge in the graph
 //-----------------------------------------------------------------------------
 template <class graph_type>
-double GetCostliestGraphEdge(const graph_type& G)
+double GetCostliestGraphEdge(const graph_type& my_graph)
 {
   double greatest = MinDouble;
 
-  graph_type::ConstNodeIterator NodeItr(G);
+  graph_type::ConstNodeIterator NodeItr(my_graph);
   const graph_type::NodeType* pN;
   for (pN = NodeItr.begin(); !NodeItr.end(); pN=NodeItr.next())
   {
-    graph_type::ConstEdgeIterator EdgeItr(G, pN->Index());
+    graph_type::ConstEdgeIterator EdgeItr(my_graph, pN->Index());
     for (const graph_type::EdgeType* pE = EdgeItr.begin(); !EdgeItr.end(); pE=EdgeItr.next())
     {
       if (pE->Cost() > greatest)greatest = pE->Cost();

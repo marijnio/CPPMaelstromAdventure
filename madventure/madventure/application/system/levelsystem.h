@@ -2,11 +2,11 @@
 
 #include "entityx/entityx.h"
 
-#include "../event/createlevel.h"
+#include "../event/createlevelevent.h"
 
 namespace ex = entityx;
 
-struct LevelSystem : public ex::System<LevelSystem> {
+struct LevelSystem : public ex::System<LevelSystem>, public ex::Receiver<LevelSystem> {
 public:
   explicit LevelSystem() {};
 
@@ -15,7 +15,7 @@ public:
   void update(ex::EntityManager &es, ex::EventManager &events,
               ex::TimeDelta dt);
 
-  void receive(const CreateLevel &createlevel);
+  void receive(const CreateLevelEvent &createlevel);
 
   ex::Entity createLevel(ex::EntityManager & es);
 
