@@ -740,15 +740,15 @@ private:
 
 public:
 
-  Graph_MinSpanningTree(graph_type &my_graph,
-                   int   source = -1):m_Graph(my_graph),
-                                   m_SpanningTree(my_graph.NumNodes()),                              
-                                   m_Fringe(my_graph.NumNodes()),
-                                   m_CostToThisNode(my_graph.NumNodes(), -1)
+  Graph_MinSpanningTree(graph_type &G,
+                   int   source = -1):m_Graph(G),
+                                   m_SpanningTree(G.NumNodes()),                              
+                                   m_Fringe(G.NumNodes()),
+                                   m_CostToThisNode(G.NumNodes(), -1)
   {                                                                             
     if (source < 0)
     {
-      for (int nd=0; nd<my_graph.NumNodes(); ++nd)
+      for (int nd=0; nd<G.NumNodes(); ++nd)
       {
         if (m_SpanningTree[nd] == 0)
         {

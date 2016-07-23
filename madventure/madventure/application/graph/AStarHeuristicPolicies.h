@@ -22,9 +22,9 @@ public:
 
   //calculate the straight line distance from node nd1 to node nd2
   template <class graph_type>
-  static double Calculate(const graph_type& my_graph, int nd1, int nd2)
+  static double Calculate(const graph_type& G, int nd1, int nd2)
   {
-    return Vec2DDistance(my_graph.GetNode(nd1).Pos(), my_graph.GetNode(nd2).Pos());
+    return Vec2DDistance(G.GetNode(nd1).Pos(), G.GetNode(nd2).Pos());
   }
 };
 
@@ -42,9 +42,9 @@ public:
 
   //calculate the straight line distance from node nd1 to node nd2
   template <class graph_type>
-  static double Calculate(const graph_type& my_graph, int nd1, int nd2)
+  static double Calculate(const graph_type& G, int nd1, int nd2)
   {
-    return Vec2DDistance(my_graph.GetNode(nd1).Pos(), my_graph.GetNode(nd2).Pos()) * RandInRange(0.9f, 1.1f);
+    return Vec2DDistance(G.GetNode(nd1).Pos(), G.GetNode(nd2).Pos()) * RandInRange(0.9f, 1.1f);
   }
 };
 
@@ -58,7 +58,7 @@ class Heuristic_Dijkstra
 public:
 
   template <class graph_type>
-  static double Calculate(const graph_type& my_graph, int nd1, int nd2)
+  static double Calculate(const graph_type& G, int nd1, int nd2)
   {
     return 0;
   }
