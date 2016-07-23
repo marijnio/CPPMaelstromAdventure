@@ -1,5 +1,7 @@
 #include <memory>
 
+#include "../utility/vector2D.h"
+
 #include "levelsystem.h"
 
 #include "../component/level.h"
@@ -20,20 +22,35 @@ void LevelSystem::update(ex::EntityManager & es, ex::EventManager & events,
 ex::Entity LevelSystem::createLevel(ex::EntityManager & es) {
   ex::Entity level = es.create();
 
-  // Create non-directional navigation graph
-  auto graph = new SparseGraph<NavGraphNode<>, NavGraphEdge>(false);
+  // Create non-directed navigation graph.
+  auto graph = new SparseGraph<NavGraphNode<ex::Entity*>, NavGraphEdge>(false);
 
-  GraphHelper_CreateGrid(*graph, 1, 1, 3, 3);
+  GraphHelper_CreateGrid(*graph, 3, 3, 3, 3, false);
 
   level.assign<Level>(graph);
 
   cout << "edges: " << graph->NumEdges() << "; nodes: " << graph->NumNodes()
     << endl;
-  //level.
+
+  for (int i = 0; i < graph->NumNodes(); i++) {
+    NavGraphNode<ex::Entity*> current_node = graph->GetNode(i);
+    ex::Entity area = es.create();
+    area.assign<Area>(current_node);
+    current_node.SetExtraInfo(&area);
+    
+
+    Vector2D position = current_node.Pos();
+    cout << "Node " << i << " is positioned at [" << position.x << ", "
+      << position.y << "]" << endl;
+
+    ex::ComponentHandle<Area> handle = current_node.ExtraInfo()->component<Area>();
+    cout << handle->myword << endl;
+  }
+
   return level;
 }
 
 void LevelSystem::receive(const CreateLevelEvent& create_level_event) {
   std::cout << "Creating level.\n" << std::endl;
-  createLevel(create_level_event.es_);
+  levels_.push_back(createLevel(create_level_event.es_));
 }

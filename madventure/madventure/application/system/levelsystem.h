@@ -20,5 +20,5 @@ public:
   ex::Entity createLevel(ex::EntityManager & es);
 
 private:
-
+  std::vector<ex::Entity> levels_;
 };

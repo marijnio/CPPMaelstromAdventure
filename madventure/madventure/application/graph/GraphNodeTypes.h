@@ -1,5 +1,5 @@
-#ifndef GRAPH_NODE_TYPES_H
-#define GRAPH_NODE_TYPES_H
+#pragma once
+
 //-----------------------------------------------------------------------------
 //
 //  Name:   GraphNodeTypes.h
@@ -13,6 +13,8 @@
 #include <fstream>
 #include "../utility/vector2d.h"
 #include "NodeTypeEnumerations.h"
+
+#include "../component/area.h"
 
 class GraphNode
 {  
@@ -43,14 +45,13 @@ public:
 };   
 
 
-
 //-----------------------------------------------------------------------------
 //
 //  Graph node for use in creating a navigation graph.This node contains
 //  the position of the node and a pointer to a BaseGameEntity... useful
 //  if you want your nodes to represent health packs, gold mines and the like
 //-----------------------------------------------------------------------------
-template <class extra_info = void*>
+template <class extra_info>
 class NavGraphNode : public GraphNode
 {
 protected:
@@ -104,5 +105,3 @@ public:
   
 };
 
-
-#endif

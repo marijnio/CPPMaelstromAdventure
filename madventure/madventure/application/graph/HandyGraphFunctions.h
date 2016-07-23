@@ -35,7 +35,7 @@ bool ValidNeighbour(int x, int y, int NumCellsX, int NumCellsY)
   
 //------------ GraphHelper_AddAllNeighboursToGridNode ------------------
 //
-//  use to add he eight neighboring edges of a graph node that 
+//  use to add the eight or four neighboring edges of a graph node that 
 //  is positioned in a grid layout
 //------------------------------------------------------------------------
 template <class graph_type>
@@ -43,7 +43,8 @@ void GraphHelper_AddAllNeighboursToGridNode(graph_type& graph,
                                             int         row,
                                             int         col,
                                             int         NumCellsX,
-                                            int         NumCellsY)
+                                            int         NumCellsY,
+                                            bool        diagonalEdges)
 {   
   for (int i=-1; i<2; ++i)
   {
@@ -54,6 +55,15 @@ void GraphHelper_AddAllNeighboursToGridNode(graph_type& graph,
 
       //skip if equal to this node
       if ( (i == 0) && (j==0) ) continue;
+
+      // Skip diagonal edges if necessary
+      if (!diagonalEdges && (
+           ((i == -1) && (j == 1))
+        || ((i == 1) && (j == 1))
+        || ((i == -1) && (j == -1))
+        || ((i == 1) && (j == -1)))) {
+        continue;
+      }
 
       //check to see if this is a valid neighbour
       if (ValidNeighbour(nodeX, nodeY, NumCellsX, NumCellsY))
@@ -96,7 +106,8 @@ void GraphHelper_CreateGrid(graph_type& graph,
                              int cySize,
                              int cxSize,
                              int NumCellsY,
-                             int NumCellsX)
+                             int NumCellsX,
+                             bool diagonalEdges)
 { 
   //need some temporaries to help calculate each node center
   double CellWidth  = (double)cySize / (double)NumCellsX;
@@ -111,20 +122,22 @@ void GraphHelper_CreateGrid(graph_type& graph,
   {
     for (int col=0; col<NumCellsX; ++col)
     {
-      graph.AddNode(NavGraphNode<>(graph.GetNextFreeNodeIndex(),
-                                   Vector2D(midX + (col*CellWidth),
-                                   midY + (row*CellHeight))));
+      graph.AddNode(graph_type::NodeType(graph.GetNextFreeNodeIndex(),
+                                   Vector2D(col*CellWidth, row*CellHeight)));
 
     }
   }
   //now to calculate the edges. (A position in a 2d array [x][y] is the
   //same as [y*NumCellsX + x] in a 1d array). Each cell has up to eight
   //neighbours.
+  // (Marijn's note: added option to use a rectangular layout of
+  // edges so to have four neighbours instead of eight.)
   for (int row=0; row<NumCellsY; ++row)
   {
     for (int col=0; col<NumCellsX; ++col)
     {
-      GraphHelper_AddAllNeighboursToGridNode(graph, row, col, NumCellsX, NumCellsY);
+      GraphHelper_AddAllNeighboursToGridNode(graph, row, col, NumCellsX,
+        NumCellsY, diagonalEdges);
     }
   }
 }  
