@@ -23,6 +23,7 @@
     <ClCompile Include="application\system\gamesystem.cc" />
     <ClCompile Include="application\system\levelsystem.cc" />
     <ClCompile Include="application\system\interpretersystem.cc" />
+    <ClCompile Include="application\system\interpretercommands.cc" />
     <ClCompile Include="main.cc" />
   </ItemGroup>
   <ItemGroup>
@@ -32,7 +33,7 @@
     <ClInclude Include="application\component\location.h" />
     <ClInclude Include="application\component\player.h" />
     <ClInclude Include="application\event\createlevelevent.h" />
-    <ClInclude Include="application\event\gamequit.h" />
+    <ClInclude Include="application\event\gamequitevent.h" />
     <ClInclude Include="application\graph\AStarHeuristicPolicies.h" />
     <ClInclude Include="application\graph\GraphAlgorithms.h" />
     <ClInclude Include="application\graph\GraphEdgeTypes.h" />
@@ -46,6 +47,7 @@
     <ClInclude Include="application\utility\mathoperations.h" />
     <ClInclude Include="application\utility\priorityqueue.h" />
     <ClInclude Include="application\utility\vector2d.h" />
+    <ClInclude Include="application\system\interpretercommands.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C9D0450B-FECC-4931-A359-4B677FA59979}</ProjectGuid>

@@ -11,37 +11,38 @@
 using namespace std;
 
 void GameSystem::configure(ex::EventManager &events) {
-  events.subscribe<GameQuit>(*this);
+  events.subscribe<GameQuitEvent>(*this);
 }
 
-void GameSystem::initialize(ex::EntityManager &es, ex::EventManager &events) {
+void GameSystem::initialize(ex::EntityManager &entities, ex::EventManager &events) {
   std::cout << "Welcome to Maelstrom Adventure.\n";
-  events.emit<CreateLevelEvent>(es);
+  events.emit<CreateLevelEvent>(entities);
   
   ex::ComponentHandle<Level> level;
-  for (ex::Entity entity : es.entities_with_components(level)) {
+  for (ex::Entity entity : entities.entities_with_components(level)) {
     NavGraphNode<ex::Entity*> first_node = level->graph->GetNode(0);
 
     // Create player entity.
-    ex::Entity player = es.create();
+    ex::Entity player = entities.create();
     player.assign<Player>();
     player.assign<Location>(first_node.ExtraInfo());
 
-    ex::ComponentHandle<Player> player_handle = player.component<Player>();
-    std::cout << "Your name is " << player_handle->name << std::endl;
+    //ex::ComponentHandle<Player> player_handle = player.component<Player>();
 
     break;
   }
+
+  initialized_ = true;
 }
 
-void GameSystem::update(ex::EntityManager &es, ex::EventManager &events,
+void GameSystem::update(ex::EntityManager &entities, ex::EventManager &events,
                         ex::TimeDelta dt) {
   if (initialized_ == false) {
-    initialize(es, events);
+    initialize(entities, events);
   }
 }
 
-void GameSystem::receive(const GameQuit &gamequit) {
+void GameSystem::receive(const GameQuitEvent &event) {
   std::cout << "Thank you for playing.\n" << std::endl;
   finished_ = true;
 }

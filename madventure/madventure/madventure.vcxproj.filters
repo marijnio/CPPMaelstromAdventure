@@ -25,6 +25,7 @@
     <ClCompile Include="main.cc" />
     <ClCompile Include="application\system\interpretersystem.cc" />
     <ClCompile Include="application\system\gamesystem.cc" />
+    <ClCompile Include="application\system\interpretercommands.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\component\level.h">
@@ -38,7 +39,6 @@
     </ClInclude>
     <ClInclude Include="application\system\interpretersystem.h" />
     <ClInclude Include="application\system\gamesystem.h" />
-    <ClInclude Include="application\event\gamequit.h" />
     <ClInclude Include="application\component\area.h" />
     <ClInclude Include="application\graph\SparseGraph.h" />
     <ClInclude Include="application\graph\AStarHeuristicPolicies.h" />
@@ -53,5 +53,7 @@
     <ClInclude Include="application\event\createlevelevent.h" />
     <ClInclude Include="application\component\player.h" />
     <ClInclude Include="application\component\location.h" />
+    <ClInclude Include="application\event\gamequitevent.h" />
+    <ClInclude Include="application\system\interpretercommands.h" />
   </ItemGroup>
 </Project>

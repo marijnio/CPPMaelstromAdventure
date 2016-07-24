@@ -14,13 +14,13 @@ void LevelSystem::configure(ex::EventManager &events) {
   events.subscribe<CreateLevelEvent>(*this);
 }
 
-void LevelSystem::update(ex::EntityManager & es, ex::EventManager & events,
-                         ex::TimeDelta dt) {
+void LevelSystem::update(ex::EntityManager &entities,
+                         ex::EventManager & events, ex::TimeDelta dt) {
 
 }
 
-ex::Entity LevelSystem::createLevel(ex::EntityManager & es) {
-  ex::Entity level = es.create();
+ex::Entity LevelSystem::createLevel(ex::EntityManager &entities) {
+  ex::Entity level = entities.create();
 
   // Create non-directed navigation graph.
   auto graph = new SparseGraph<NavGraphNode<ex::Entity*>, NavGraphEdge>(false);
@@ -29,24 +29,15 @@ ex::Entity LevelSystem::createLevel(ex::EntityManager & es) {
 
   level.assign<Level>(*graph);
 
-  cout << "edges: " << graph->NumEdges() << "; nodes: " << graph->NumNodes()
-    << endl;
-
   ex::ComponentHandle<Level> level_handle = level.component<Level>();
   auto obtained_graph = level_handle->graph;
   for (int i = 0; i < obtained_graph->NumNodes(); i++) {
     NavGraphNode<ex::Entity*> current_node = obtained_graph->GetNode(i);
-    ex::Entity area = es.create();
+    ex::Entity area = entities.create();
     area.assign<Area>(current_node);
     current_node.SetExtraInfo(&area);
-    
 
-    Vector2D position = current_node.Pos();
-    cout << "Node " << i << " is positioned at [" << position.x << ", "
-      << position.y << "]" << endl;
-
-    ex::ComponentHandle<Area> handle = current_node.ExtraInfo()->component<Area>();
-    cout << handle->myword << endl;
+    //ex::ComponentHandle<Area> handle = current_node.ExtraInfo()->component<Area>();
   }
 
   return level;

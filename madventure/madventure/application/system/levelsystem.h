@@ -12,12 +12,12 @@ public:
 
   void configure(ex::EventManager &events) override;
 
-  void update(ex::EntityManager &es, ex::EventManager &events,
+  void update(ex::EntityManager &entities, ex::EventManager &events,
               ex::TimeDelta dt);
 
   void receive(const CreateLevelEvent &createlevel);
 
-  ex::Entity createLevel(ex::EntityManager & es);
+  ex::Entity createLevel(ex::EntityManager &entities);
 
 private:
   std::vector<ex::Entity> levels_;
