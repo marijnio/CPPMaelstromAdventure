@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 
-#include "entityx/entityx.h"
+#include "gamesystem.h"
 
 #include "../event/gamequitevent.h"
 
@@ -14,24 +14,19 @@ class Command {
 public:
   Command() {}
 
-  virtual void execute(ex::EntityManager &entities, ex::EventManager &events,
-                       vector<string> words) = 0;
+  virtual void execute(GameSystem game_system, vector<string> words) = 0;
 };
 
 class InspectCommand : public Command {
 public:
   InspectCommand() {}
-  void execute(ex::EntityManager &entities, ex::EventManager &events,
-               vector<string> words) {
-    std::cout << "Inspecting..." << std::endl;
-  }
+  void execute(GameSystem game_system, vector<string> words);
 };
 
 class QuitCommand : public Command {
 public:
   QuitCommand() {}
-  void execute(ex::EntityManager &entities, ex::EventManager &events,
-               vector<string> words) {
-    events.emit<GameQuitEvent>();
+  void execute(GameSystem game_system, vector<string> words) {
+    //events.emit<GameQuitEvent>();
   }
 };

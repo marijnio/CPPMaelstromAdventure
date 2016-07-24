@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <crtdbg.h>
 
-#include "entityx/entityx.h"
 #include "application/application.h"
 
 int main(int args[]) {

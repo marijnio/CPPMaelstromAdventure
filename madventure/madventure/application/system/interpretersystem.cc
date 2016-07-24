@@ -9,8 +9,7 @@
 #include "../event/gamequitevent.h"
 #include "../event/createlevelevent.h"
 
-void InterpreterSystem::update(ex::EntityManager &entities,
-                               ex::EventManager &events, ex::TimeDelta dt) {
+void InterpreterSystem::update(GameSystem game_system) {
   string line;
   getline(cin, line); // Read one line from cin.
   stringstream buffer(line);
@@ -36,7 +35,7 @@ void InterpreterSystem::update(ex::EntityManager &entities,
     std::map<std::string, Command*>::iterator it = commands_.find(words[0]);
     assert(it != commands_.end()); // Verify
 
-    it->second->execute(entities, events, words);
+    it->second->execute(game_system, words);
   }
 
 

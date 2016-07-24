@@ -10,39 +10,26 @@
 
 using namespace std;
 
-void GameSystem::configure(ex::EventManager &events) {
-  events.subscribe<GameQuitEvent>(*this);
-}
-
-void GameSystem::initialize(ex::EntityManager &entities, ex::EventManager &events) {
+void GameSystem::configure() {
   std::cout << "Welcome to Maelstrom Adventure.\n";
-  events.emit<CreateLevelEvent>(entities);
-  
-  ex::ComponentHandle<Level> level;
-  for (ex::Entity entity : entities.entities_with_components(level)) {
-    NavGraphNode<ex::Entity*> first_node = level->graph->GetNode(0);
+  //events.emit<CreateLevelEvent>(entities);
+  //
+  //ex::ComponentHandle<Level> level;
+  //for (ex::Entity entity : entities.entities_with_components(level)) {
+  //  NavGraphNode<ex::Entity*> first_node = level->graph->GetNode(0);
 
-    // Create player entity.
-    ex::Entity player = entities.create();
-    player.assign<Player>();
-    player.assign<Location>(first_node.ExtraInfo());
+  //  // Create player entity.
+  //  ex::Entity player = entities.create();
+  //  player.assign<Player>();
+  //  player.assign<Location>(first_node.ExtraInfo());
 
-    //ex::ComponentHandle<Player> player_handle = player.component<Player>();
+  //  //ex::ComponentHandle<Player> player_handle = player.component<Player>();
 
-    break;
-  }
+  //  break;
+  //}
 
   initialized_ = true;
 }
 
-void GameSystem::update(ex::EntityManager &entities, ex::EventManager &events,
-                        ex::TimeDelta dt) {
-  if (initialized_ == false) {
-    initialize(entities, events);
-  }
-}
-
-void GameSystem::receive(const GameQuitEvent &event) {
-  std::cout << "Thank you for playing.\n" << std::endl;
-  finished_ = true;
+void GameSystem::update() {
 }

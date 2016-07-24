@@ -10,7 +10,7 @@
 namespace ex = entityx;
 using namespace std;
 
-class InterpreterSystem : public ex::System<InterpreterSystem> {
+class InterpreterSystem {
 private:
   map<string, Command*> commands_ = {
     { "inspect", new InspectCommand() },
@@ -28,7 +28,6 @@ public:
     }
   };
 
-  void update(ex::EntityManager &entities, ex::EventManager &events,
-              ex::TimeDelta dt);
+  void update(GameSystem game_system);
 
 };

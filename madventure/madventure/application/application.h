@@ -1,15 +1,19 @@
 #pragma once
 
-#include "entityx/entityx.h"
 #include "system/gamesystem.h"
+#include "system/interpreterSystem.h"
+#include "system/levelsystem.h"
 
-namespace ex = entityx;
-
-class Application : public ex::EntityX {
+class Application {
 public:
   explicit Application();
 
-  void update(ex::TimeDelta dt);
+  void update();
 
-  bool is_finished() { return systems.system<GameSystem>()->is_finished(); }
+  bool is_finished() { return game_system_->is_finished(); }
+
+private:
+  GameSystem* game_system_;
+  InterpreterSystem* interpreter_system_;
+  LevelSystem* level_system_;
 };
