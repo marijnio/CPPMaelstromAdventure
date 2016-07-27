@@ -1,12 +1,6 @@
 #include "interpretercommands.h"
 
-#include "../component/player.h"
-#include "../component/location.h"
-#include "../component/area.h"
-
-#include "../system/levelsystem.h"
-
-void InspectCommand::execute(GameSystem game_system, vector<string> words) {
+void InspectCommand::execute(shared_ptr<GameSystem> game_system, vector<string> words) {
 
   // Retrieve player location component.
   //ex::ComponentHandle<Player> player;
@@ -43,4 +37,7 @@ void InspectCommand::execute(GameSystem game_system, vector<string> words) {
   //areaComponent.printWeatherDescription();
   //areaComponent.printEnemies();
   //level.describeAvailableDirections(nodeIndex);
+}
+
+void QuitCommand::execute(shared_ptr<GameSystem> game_system, vector<string> words) {
 }

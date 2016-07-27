@@ -1,8 +1,9 @@
 #pragma once
 
+#include <memory>
+
 #include "system/gamesystem.h"
 #include "system/interpreterSystem.h"
-#include "system/levelsystem.h"
 
 class Application {
 public:
@@ -13,7 +14,6 @@ public:
   bool is_finished() { return game_system_->is_finished(); }
 
 private:
-  GameSystem* game_system_;
-  InterpreterSystem* interpreter_system_;
-  LevelSystem* level_system_;
+  shared_ptr<GameSystem> game_system_;
+  shared_ptr<InterpreterSystem> interpreter_system_;
 };

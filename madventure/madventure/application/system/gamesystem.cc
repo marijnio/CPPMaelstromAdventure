@@ -1,17 +1,30 @@
 #include <iostream>
 #include <string>
+#include <assert.h>
 
 #include "gamesystem.h"
-#include "../event/createlevelevent.h"
-#include "../component/level.h"
-#include "../component/area.h"
-#include "../component/player.h"
-#include "../component/location.h"
+#include "../graph/SparseGraph.h"
+#include "../graph/HandyGraphFunctions.h"
+#include "../model/level.h"
+
+//#include "../event/createlevelevent.h"
+//#include "../component/area.h"
+//#include "../component/player.h"
+//#include "../component/location.h"
 
 using namespace std;
 
-void GameSystem::configure() {
+GameSystem::GameSystem() {
   std::cout << "Welcome to Maelstrom Adventure.\n";
+  world_ = make_shared<World>();
+  finished_ = false;
+}
+
+void GameSystem::Init() {
+  NewLevel(3, 3);
+}
+
+
   //events.emit<CreateLevelEvent>(entities);
   //
   //ex::ComponentHandle<Level> level;
@@ -28,7 +41,26 @@ void GameSystem::configure() {
   //  break;
   //}
 
-  initialized_ = true;
+void GameSystem::NewLevel(int columns, int rows) {
+  assert(columns > 0 && rows > 0);
+
+  // Make new bi-directional graph.
+  auto graph = make_shared<SparseGraph<NavGraphNode<shared_ptr<Area>>, NavGraphEdge>>(false);
+  // Fill graph with a grid of nodes.
+  GraphHelper_CreateGrid(*graph, columns, rows, columns, rows, false);
+
+  // Create areas for every node and attach.
+  for (int i = 0; i < graph->NumNodes(); i++) {
+    NavGraphNode<shared_ptr<Area>> current_node = graph->GetNode(i);
+    shared_ptr<Area> area = make_shared<Area>(current_node);
+    current_node.SetExtraInfo(area);
+  }
+
+  // Place graph in a new level.
+  shared_ptr<Level> level = make_shared<Level>(graph);
+
+  // Place level in world.
+  world_->levels.push_back(level);
 }
 
 void GameSystem::update() {

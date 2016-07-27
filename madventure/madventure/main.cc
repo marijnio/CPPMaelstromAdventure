@@ -9,7 +9,7 @@ int main(int args[]) {
   Application app;
 
   do {
-    app.update(NULL);
+    app.update();
   } while (!app.is_finished());
 
   _CrtDumpMemoryLeaks();

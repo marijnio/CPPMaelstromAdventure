@@ -19,27 +19,17 @@
     <ClCompile Include="application\application.cc">
       <Filter>Application</Filter>
     </ClCompile>
-    <ClCompile Include="application\system\levelsystem.cc">
-      <Filter>Application\System</Filter>
-    </ClCompile>
     <ClCompile Include="main.cc" />
     <ClCompile Include="application\system\interpretersystem.cc" />
     <ClCompile Include="application\system\gamesystem.cc" />
     <ClCompile Include="application\system\interpretercommands.cc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="application\component\level.h">
-      <Filter>Application\Component</Filter>
-    </ClInclude>
     <ClInclude Include="application\application.h">
       <Filter>Application</Filter>
     </ClInclude>
-    <ClInclude Include="application\system\levelsystem.h">
-      <Filter>Application\System</Filter>
-    </ClInclude>
     <ClInclude Include="application\system\interpretersystem.h" />
     <ClInclude Include="application\system\gamesystem.h" />
-    <ClInclude Include="application\component\area.h" />
     <ClInclude Include="application\graph\SparseGraph.h" />
     <ClInclude Include="application\graph\AStarHeuristicPolicies.h" />
     <ClInclude Include="application\graph\GraphAlgorithms.h" />
@@ -50,10 +40,14 @@
     <ClInclude Include="application\utility\vector2d.h" />
     <ClInclude Include="application\utility\mathoperations.h" />
     <ClInclude Include="application\utility\priorityqueue.h" />
-    <ClInclude Include="application\event\createlevelevent.h" />
-    <ClInclude Include="application\component\player.h" />
-    <ClInclude Include="application\component\location.h" />
     <ClInclude Include="application\event\gamequitevent.h" />
     <ClInclude Include="application\system\interpretercommands.h" />
+    <ClInclude Include="application\model\area.h" />
+    <ClInclude Include="application\model\level.h">
+      <Filter>Application\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="application\model\player.h" />
+    <ClInclude Include="application\model\world.h" />
+    <ClInclude Include="application\model\unit.h" />
   </ItemGroup>
 </Project>

@@ -7,9 +7,8 @@
 
 #include "interpretersystem.h"
 #include "../event/gamequitevent.h"
-#include "../event/createlevelevent.h"
 
-void InterpreterSystem::update(GameSystem game_system) {
+void InterpreterSystem::update() {
   string line;
   getline(cin, line); // Read one line from cin.
   stringstream buffer(line);
@@ -30,12 +29,11 @@ void InterpreterSystem::update(GameSystem game_system) {
 
   // Check if keyword is present in command map.
   if (commands_.find(words[0]) != commands_.end()) {
-    std::cout << "map contains key world!\n";
     
     std::map<std::string, Command*>::iterator it = commands_.find(words[0]);
     assert(it != commands_.end()); // Verify
 
-    it->second->execute(game_system, words);
+    it->second->execute(game_system_, words);
   }
 
 

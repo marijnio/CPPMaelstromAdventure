@@ -1,13 +1,14 @@
 #pragma once
 
-#include "../event/gamequitevent.h"
+#include <memory>
 
+#include "../model/world.h"
 
 class GameSystem {
 public:
-  explicit GameSystem() {};
+  explicit GameSystem();
 
-  void configure();
+  void Init();
 
   void update();
 
@@ -15,5 +16,7 @@ public:
 
 private:
   bool finished_;
-  bool initialized_ = false;
+  shared_ptr<World> world_;
+
+  void NewLevel(int columns, int row);
 };

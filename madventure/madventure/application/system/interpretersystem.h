@@ -2,23 +2,19 @@
 
 #include <string>
 #include <map>
+#include <memory>
 
-#include "entityx/entityx.h"
+#include "gamesystem.h"
 
 #include "interpretercommands.h"
 
-namespace ex = entityx;
 using namespace std;
 
 class InterpreterSystem {
-private:
-  map<string, Command*> commands_ = {
-    { "inspect", new InspectCommand() },
-    { "quit", new QuitCommand() }
-  };
-
 public:
-  explicit InterpreterSystem() {};
+  explicit InterpreterSystem(shared_ptr<GameSystem> game_system)
+      : game_system_(game_system) {};
+
   ~InterpreterSystem() {
     // Clean up map after use.
     std::map<string, Command*>::iterator it;
@@ -28,6 +24,14 @@ public:
     }
   };
 
-  void update(GameSystem game_system);
+  void update();
+
+private:
+  map<string, Command*> commands_ = {
+    { "inspect", new InspectCommand() },
+    { "quit", new QuitCommand() }
+  };
+
+  shared_ptr<GameSystem> game_system_;
 
 };

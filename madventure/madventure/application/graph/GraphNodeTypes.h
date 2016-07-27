@@ -14,8 +14,6 @@
 #include "../utility/vector2d.h"
 #include "NodeTypeEnumerations.h"
 
-#include "../component/area.h"
-
 class GraphNode
 {  
 protected:
