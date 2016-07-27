@@ -9,7 +9,7 @@ class Application {
 public:
   explicit Application();
 
-  void update();
+  void Update();
 
   bool is_finished() { return game_system_->is_finished(); }
 

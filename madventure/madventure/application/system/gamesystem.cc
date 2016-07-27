@@ -15,13 +15,21 @@
 using namespace std;
 
 GameSystem::GameSystem() {
-  std::cout << "Welcome to Maelstrom Adventure.\n";
-  world_ = make_shared<World>();
   finished_ = false;
 }
 
 void GameSystem::Init() {
-  NewLevel(3, 3);
+  std::cout << "Welcome to Maelstrom Adventure.\n\n";
+
+  // Create world and level.
+  world_ = make_shared<World>();
+  shared_ptr<Level> level = NewLevel(3, 3);
+
+  // Select starting area.
+  auto area = level->graph->GetNode(0).ExtraInfo();
+
+  // Create player and place in area.
+  player_ = make_shared<Player>(area);
 }
 
 
@@ -41,7 +49,8 @@ void GameSystem::Init() {
   //  break;
   //}
 
-void GameSystem::NewLevel(int columns, int rows) {
+shared_ptr<Level> GameSystem::NewLevel(int columns, int rows) {
+  assert(world_);
   assert(columns > 0 && rows > 0);
 
   // Make new bi-directional graph.
@@ -49,19 +58,20 @@ void GameSystem::NewLevel(int columns, int rows) {
   // Fill graph with a grid of nodes.
   GraphHelper_CreateGrid(*graph, columns, rows, columns, rows, false);
 
-  // Create areas for every node and attach.
-  for (int i = 0; i < graph->NumNodes(); i++) {
-    NavGraphNode<shared_ptr<Area>> current_node = graph->GetNode(i);
-    shared_ptr<Area> area = make_shared<Area>(current_node);
-    current_node.SetExtraInfo(area);
-  }
-
   // Place graph in a new level.
   shared_ptr<Level> level = make_shared<Level>(graph);
 
+  // Create areas in level for every node and attach.
+  for (int i = 0; i < graph->NumNodes(); i++) {
+    shared_ptr<Area> area = make_shared<Area>(i, level);
+    graph->GetNode(i).SetExtraInfo(area);
+  }
+
   // Place level in world.
   world_->levels.push_back(level);
+
+  return level;
 }
 
-void GameSystem::update() {
+void GameSystem::Update() {
 }

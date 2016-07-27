@@ -8,7 +8,9 @@
 #include "interpretersystem.h"
 #include "../event/gamequitevent.h"
 
-void InterpreterSystem::update() {
+void InterpreterSystem::Update() {
+  cout << ">";
+
   string line;
   getline(cin, line); // Read one line from cin.
   stringstream buffer(line);
@@ -19,13 +21,12 @@ void InterpreterSystem::update() {
     istream_iterator<string>(),
     back_inserter(words));
 
-  cout << "Input contains:";
-  for (vector<string>::iterator it = words.begin();
-       it != words.end(); ++it) {
-    cout << ' ' << *it;
-    cout << '\n';
-  }
-  cout << '\n';
+  //cout << "Input contains:";
+  //for (vector<string>::iterator it = words.begin();
+  //     it != words.end(); ++it) {
+  //  cout << ' ' << *it;
+  //  cout << '\n';
+  //}
 
   // Check if keyword is present in command map.
   if (commands_.find(words[0]) != commands_.end()) {
@@ -33,9 +34,10 @@ void InterpreterSystem::update() {
     std::map<std::string, Command*>::iterator it = commands_.find(words[0]);
     assert(it != commands_.end()); // Verify
 
-    it->second->execute(game_system_, words);
+    it->second->Execute(game_system_, words);
   }
 
+  cout << '\n';
 
 
   //String input = read();

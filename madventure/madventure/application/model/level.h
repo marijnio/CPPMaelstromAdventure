@@ -8,7 +8,8 @@
 #include "../graph/GraphEdgeTypes.h"
 
 struct Level {
-  explicit Level(shared_ptr<SparseGraph<NavGraphNode<shared_ptr<Area>>, NavGraphEdge>> graph)
+  explicit Level(shared_ptr<SparseGraph<NavGraphNode<shared_ptr<Area>>,
+                 NavGraphEdge>> graph)
       : graph(graph) {}
 
   shared_ptr<SparseGraph<NavGraphNode<shared_ptr<Area>>, NavGraphEdge>> graph;

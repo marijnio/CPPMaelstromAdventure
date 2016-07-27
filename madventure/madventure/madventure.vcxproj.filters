@@ -23,6 +23,7 @@
     <ClCompile Include="application\system\interpretersystem.cc" />
     <ClCompile Include="application\system\gamesystem.cc" />
     <ClCompile Include="application\system\interpretercommands.cc" />
+    <ClCompile Include="application\system\levelsystem.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\application.h">
@@ -49,5 +50,7 @@
     <ClInclude Include="application\model\player.h" />
     <ClInclude Include="application\model\world.h" />
     <ClInclude Include="application\model\unit.h" />
+    <ClInclude Include="application\model\direction.h" />
+    <ClInclude Include="application\system\levelsystem.h" />
   </ItemGroup>
 </Project>

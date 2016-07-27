@@ -77,7 +77,11 @@ public:
 
   //non const version
   EdgeType& GetEdge(int from, int to);
-    
+
+  //method for obtaining the edgelist
+  const EdgeList& GetEdgeList(int NodeIndex)const {
+    return m_Edges[NodeIndex];
+  }
 
   //retrieves the next free node index
   int   GetNextFreeNodeIndex()const{return m_iNextNodeIndex;}

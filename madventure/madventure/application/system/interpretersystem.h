@@ -24,7 +24,7 @@ public:
     }
   };
 
-  void update();
+  void Update();
 
 private:
   map<string, Command*> commands_ = {
