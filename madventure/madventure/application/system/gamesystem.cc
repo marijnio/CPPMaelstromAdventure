@@ -17,6 +17,7 @@ using namespace std;
 GameSystem::GameSystem() {
   finished_ = false;
   interpreter_system_ = new InterpreterSystem(this);
+  level_system_ = new LevelSystem();
 }
 
 GameSystem::~GameSystem() {
