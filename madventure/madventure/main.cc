@@ -1,6 +1,4 @@
-#define CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
+#include <vld.h> 
 
 #include "application/application.h"
 
@@ -11,8 +9,6 @@ int main(int args[]) {
   do {
     app.Update();
   } while (!app.is_finished());
-
-  _CrtDumpMemoryLeaks();
 
   return 0;
 }

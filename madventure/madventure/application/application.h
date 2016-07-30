@@ -15,5 +15,4 @@ public:
 
 private:
   shared_ptr<GameSystem> game_system_;
-  shared_ptr<InterpreterSystem> interpreter_system_;
 };

@@ -29,10 +29,10 @@ void InterpreterSystem::Update() {
   //}
 
   // Check if keyword is present in command map.
-  if (commands_.find(words[0]) != commands_.end()) {
+  if (commands.find(words[0]) != commands.end()) {
     
-    std::map<std::string, Command*>::iterator it = commands_.find(words[0]);
-    assert(it != commands_.end()); // Verify
+    std::map<std::string, Command*>::iterator it = commands.find(words[0]);
+    assert(it != commands.end()); // Verify
 
     it->second->Execute(game_system_, words);
   }
@@ -66,3 +66,10 @@ void InterpreterSystem::Update() {
   //System.out.println();
 
 }
+
+// C++11 uniform initialization of command map.
+map<string, Command*> InterpreterSystem::commands = {
+  { "inspect", new InspectCommand() },
+  { "help", new HelpCommand() },
+  { "quit", new QuitCommand() }
+};

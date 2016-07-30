@@ -2,6 +2,7 @@
 
 #include <memory>
 
+#include "interpretersystem.h"
 #include "levelsystem.h"
 #include "../model/world.h"
 #include "../model/player.h"
@@ -9,6 +10,7 @@
 class GameSystem {
 public:
   explicit GameSystem();
+  ~GameSystem();
 
   void Init();
 
@@ -22,6 +24,7 @@ public:
 private:
   bool finished_;
 
+  InterpreterSystem* interpreter_system_;
   LevelSystem level_system_;
 
   shared_ptr<World> world_;

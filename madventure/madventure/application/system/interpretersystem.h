@@ -4,21 +4,21 @@
 #include <map>
 #include <memory>
 
-#include "gamesystem.h"
-
 #include "interpretercommands.h"
+
+class GameSystem;
 
 using namespace std;
 
 class InterpreterSystem {
 public:
-  explicit InterpreterSystem(shared_ptr<GameSystem> game_system)
+  explicit InterpreterSystem(GameSystem* game_system)
       : game_system_(game_system) {};
 
   ~InterpreterSystem() {
     // Clean up map after use.
-    std::map<string, Command*>::iterator it;
-    for (it = commands_.begin(); it != commands_.end(); ++it) {
+    map<string, Command*>::iterator it;
+    for (it = commands.begin(); it != commands.end(); ++it) {
       Command* pointer = it->second;
       delete pointer;
     }
@@ -26,12 +26,8 @@ public:
 
   void Update();
 
+  static map<string, Command*> commands;
+
 private:
-  map<string, Command*> commands_ = {
-    { "inspect", new InspectCommand() },
-    { "quit", new QuitCommand() }
-  };
-
-  shared_ptr<GameSystem> game_system_;
-
+  GameSystem* game_system_;
 };

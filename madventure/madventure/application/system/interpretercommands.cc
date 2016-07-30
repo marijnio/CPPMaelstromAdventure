@@ -1,6 +1,8 @@
 #include "interpretercommands.h"
 
-void InspectCommand::Execute(shared_ptr<GameSystem> game_system, vector<string> words) {
+#include "gamesystem.h"
+
+void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
 
   auto player = game_system->player();
   auto area = player->area;
@@ -13,6 +15,10 @@ void InspectCommand::Execute(shared_ptr<GameSystem> game_system, vector<string> 
   //level.describeAvailableDirections(nodeIndex);
 }
 
-void QuitCommand::Execute(shared_ptr<GameSystem> game_system, vector<string> words) {
+void HelpCommand::Execute(GameSystem* game_system, vector<string> words) {
+  
+}
+
+void QuitCommand::Execute(GameSystem* game_system, vector<string> words) {
   game_system->Quit();
 }

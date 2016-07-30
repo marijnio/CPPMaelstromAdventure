@@ -16,6 +16,11 @@ using namespace std;
 
 GameSystem::GameSystem() {
   finished_ = false;
+  interpreter_system_ = new InterpreterSystem(this);
+}
+
+GameSystem::~GameSystem() {
+  delete interpreter_system_;
 }
 
 void GameSystem::Init() {
@@ -74,4 +79,5 @@ shared_ptr<Level> GameSystem::NewLevel(int columns, int rows) {
 }
 
 void GameSystem::Update() {
+  interpreter_system_->Update();
 }
