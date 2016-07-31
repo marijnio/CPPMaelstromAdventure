@@ -10,7 +10,7 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
   auto player = game_system->player();
   auto area = player->area;
 
-  auto directions = game_system->levelSystem()->GetNeighboringNodes(area);
+  auto directions = game_system->levelSystem()->GetNeighboringNodeIndices(area);
 
   //timeComponent.printTime();
   //areaComponent.printWeatherDescription();
@@ -39,7 +39,7 @@ void GoCommand::Execute(GameSystem* game_system, vector<string> words) {
   //auto player = game_system->player();
   //auto area = player->area;
 
-  //auto directions = game_system->levelSystem()->GetNeighboringNodes(area);
+  //auto directions = game_system->levelSystem()->GetNeighboringNodeIndices(area);
 }
 
 void HelpCommand::Execute(GameSystem* game_system, vector<string> words) {

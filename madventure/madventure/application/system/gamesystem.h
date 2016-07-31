@@ -18,7 +18,7 @@ public:
   void Quit() { finished_ = true; }
 
   bool is_finished() { return finished_; }
-  LevelSystem<SparseGraph<NavGraphNode<shared_ptr<Area>>, NavGraphEdge>>* levelSystem() { return level_system_; }
+  LevelSystem* levelSystem() { return level_system_; }
   InterpreterSystem* interpreterSystem() { return interpreter_system_; }
   shared_ptr<Player> player() { return player_; }
 
@@ -26,7 +26,7 @@ private:
   bool finished_;
 
   InterpreterSystem* interpreter_system_;
-  LevelSystem<SparseGraph<NavGraphNode<shared_ptr<Area>>, NavGraphEdge>>* level_system_;
+  LevelSystem* level_system_;
 
   shared_ptr<World> world_;
   shared_ptr<Player> player_;
