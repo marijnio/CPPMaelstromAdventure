@@ -21,13 +21,6 @@ void InterpreterSystem::Update() {
     istream_iterator<string>(),
     back_inserter(words));
 
-  //cout << "Input contains:";
-  //for (vector<string>::iterator it = words.begin();
-  //     it != words.end(); ++it) {
-  //  cout << ' ' << *it;
-  //  cout << '\n';
-  //}
-
   // Check if keyword is present in command map.
   if (commands.find(words[0]) != commands.end()) {
     
@@ -69,6 +62,7 @@ void InterpreterSystem::Update() {
 
 // C++11 uniform initialization of command map.
 map<string, Command*> InterpreterSystem::commands = {
+  { "go", new GoCommand() },
   { "inspect", new InspectCommand() },
   { "help", new HelpCommand() },
   { "quit", new QuitCommand() }

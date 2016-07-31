@@ -10,12 +10,36 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
   auto player = game_system->player();
   auto area = player->area;
 
-  auto directions = game_system->levelSystem()->GetAreaDirections(area);
+  auto directions = game_system->levelSystem()->GetNeighboringNodes(area);
 
   //timeComponent.printTime();
   //areaComponent.printWeatherDescription();
   //areaComponent.printEnemies();
   //level.describeAvailableDirections(nodeIndex);
+}
+
+void GoCommand::Execute(GameSystem* game_system, vector<string> words) {
+
+  // Extract direction to go to.
+  if (words.size() <= 1) {
+    cout << "Go where?\n";
+    return;
+  }
+
+  string pronoun = words.at(1);
+  char initial = pronoun.at(0);
+
+  // Verify if player can go into that direction.
+
+  // Move player into that direction.
+
+  // Perform inspect command.
+
+
+  //auto player = game_system->player();
+  //auto area = player->area;
+
+  //auto directions = game_system->levelSystem()->GetNeighboringNodes(area);
 }
 
 void HelpCommand::Execute(GameSystem* game_system, vector<string> words) {
@@ -30,7 +54,7 @@ void HelpCommand::Execute(GameSystem* game_system, vector<string> words) {
     if (++it != commands.end()) {
       cout << ", ";
     } else {
-      cout << ".";
+      cout << ".\n";
     }
     --it; // Return iterator to position.
   }

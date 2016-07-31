@@ -17,7 +17,8 @@ using namespace std;
 GameSystem::GameSystem() {
   finished_ = false;
   interpreter_system_ = new InterpreterSystem(this);
-  level_system_ = new LevelSystem();
+  level_system_ = new LevelSystem<SparseGraph<NavGraphNode<shared_ptr<Area>>,
+                                  NavGraphEdge>>();
 }
 
 GameSystem::~GameSystem() {

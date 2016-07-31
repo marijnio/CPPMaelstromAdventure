@@ -26,4 +26,4 @@ struct Direction {
   int Opposite() {
     return (angle + 180) % 360;
   }
-}
+};

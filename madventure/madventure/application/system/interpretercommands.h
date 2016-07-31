@@ -20,6 +20,12 @@ public:
   void Execute(GameSystem* game_system, vector<string> words);
 };
 
+class GoCommand : public Command {
+public:
+  GoCommand() {}
+  void Execute(GameSystem* game_system, vector<string> words);
+};
+
 class HelpCommand : public Command {
 public:
   HelpCommand() {}
