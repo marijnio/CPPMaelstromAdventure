@@ -22,8 +22,9 @@
     <ClCompile Include="main.cc" />
     <ClCompile Include="application\system\interpretersystem.cc" />
     <ClCompile Include="application\system\gamesystem.cc" />
-    <ClCompile Include="application\system\interpretercommands.cc" />
     <ClCompile Include="application\system\levelsystem.cc" />
+    <ClCompile Include="application\system\commands.cc" />
+    <ClCompile Include="application\system\debugcommands.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\application.h">
@@ -42,7 +43,6 @@
     <ClInclude Include="application\utility\mathoperations.h" />
     <ClInclude Include="application\utility\priorityqueue.h" />
     <ClInclude Include="application\event\gamequitevent.h" />
-    <ClInclude Include="application\system\interpretercommands.h" />
     <ClInclude Include="application\model\area.h" />
     <ClInclude Include="application\model\level.h">
       <Filter>Application\Component</Filter>
@@ -52,5 +52,7 @@
     <ClInclude Include="application\model\unit.h" />
     <ClInclude Include="application\model\direction.h" />
     <ClInclude Include="application\system\levelsystem.h" />
+    <ClInclude Include="application\system\commands.h" />
+    <ClInclude Include="application\system\debugcommands.h" />
   </ItemGroup>
 </Project>

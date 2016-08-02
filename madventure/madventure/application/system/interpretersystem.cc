@@ -8,6 +8,16 @@
 #include "interpretersystem.h"
 #include "../event/gamequitevent.h"
 
+Command* InterpreterSystem::FindCommand(map<string, Command*> table, const string keyword) {
+  std::map<std::string, Command*>::iterator it;
+  if (table.find(keyword) != table.end()) {
+    it = table.find(keyword);
+    assert(it != table.end()); // Verify
+    return it->second;
+  }
+  return nullptr;
+}
+
 void InterpreterSystem::Update() {
   cout << ">";
 
@@ -21,13 +31,19 @@ void InterpreterSystem::Update() {
     istream_iterator<string>(),
     back_inserter(words));
 
-  // Check if keyword is present in command map.
-  if (commands.find(words[0]) != commands.end()) {
-    
-    std::map<std::string, Command*>::iterator it = commands.find(words[0]);
-    assert(it != commands.end()); // Verify
+  // Find match for keyword in known commands map.
+  Command* c = FindCommand(commands, words[0]);
 
-    it->second->Execute(game_system_, words);
+  if (c == nullptr) {
+    // Not found, try next map.
+    c = FindCommand(debug_commands, words[0]);
+  }
+
+  if (c != nullptr) {
+    // Found, execute.
+    c->Execute(game_system_, words);
+  } else {
+    // Not found.
   }
 
   cout << '\n';
@@ -60,10 +76,14 @@ void InterpreterSystem::Update() {
 
 }
 
-// C++11 uniform initialization of command map.
+// C++11 uniform initialization of command maps.
+
 map<string, Command*> InterpreterSystem::commands = {
   { "go", new GoCommand() },
   { "inspect", new InspectCommand() },
   { "help", new HelpCommand() },
   { "quit", new QuitCommand() }
+};
+map<string, Command*> InterpreterSystem::debug_commands = {
+  { "debugposition", new DebugPositionCommand() }
 };

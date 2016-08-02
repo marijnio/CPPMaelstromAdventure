@@ -10,8 +10,6 @@ vector<int> LevelSystem::GetNeighboringNodeIndices(shared_ptr<Area> area) {
   // Extract graph from area
   auto graph = area->level->graph;
 
-  Vector2D position = graph->GetNode(area->node_index).Pos();
-  cout << "You are at [" << position.x << ", " << position.y << "]\n";
 
   list<NavGraphEdge> edges = graph->GetEdgeList(area->node_index);
 
