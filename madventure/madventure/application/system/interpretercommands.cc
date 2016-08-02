@@ -9,8 +9,23 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
 
   auto player = game_system->player();
   auto area = player->area;
+  auto graph = area->level->graph;
+
+  Vector2D this_position = graph->GetNode(area->node_index).Pos();
 
   auto neighbors = game_system->levelSystem()->GetNeighboringNodeIndices(area);
+
+  vector<int>::iterator it;
+  for (it = neighbors.begin(); it != neighbors.end(); ++it) {
+    // For every neighboring node index.
+    int index = *it;
+    // Get node and its position.
+    auto neighbor = graph->GetNode(index);
+    Vector2D that_position = neighbor.Pos();
+    // Find at which angle it is positioned from current node.
+    double angle = LevelSystem::RelativeVectorAngle(this_position, that_position);
+  }
+
   //auto direction = game_system->levelSystem()->
 
   //timeComponent.printTime();
