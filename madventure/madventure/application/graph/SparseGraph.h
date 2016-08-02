@@ -85,6 +85,11 @@ public:
     return m_Edges[NodeIndex];
   }
 
+  //method for obtaining the nodevector
+  const NodeVector& GetNodeVector()const {
+    return m_Nodes;
+  }
+
   //retrieves the next free node index
   int   GetNextFreeNodeIndex()const{return m_iNextNodeIndex;}
   

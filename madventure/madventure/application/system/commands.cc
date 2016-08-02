@@ -6,7 +6,7 @@
 #include "../model/area.h"
 #include "../model/direction.h"
 
-#include "../utility/grammar.h"
+#include "../utility/mygrammar.h"
 
 void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
   auto player = game_system->unit_system()->player();

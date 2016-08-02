@@ -58,6 +58,7 @@
     <ClInclude Include="application\model\enemy.h" />
     <ClInclude Include="application\system\unitsystem.h" />
     <ClInclude Include="application\model\gateway.h" />
-    <ClInclude Include="application\utility\grammar.h" />
+    <ClInclude Include="application\utility\mymath.h" />
+    <ClInclude Include="application\utility\mygrammar.h" />
   </ItemGroup>
 </Project>

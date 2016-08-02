@@ -31,4 +31,6 @@ private:
   InterpreterSystem* interpreter_system_;
   LevelSystem* level_system_;
   UnitSystem* unit_system_;
+
+  void InjectUnits(shared_ptr<Level> level);
 };

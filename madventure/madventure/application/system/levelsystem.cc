@@ -81,6 +81,16 @@ shared_ptr<Area> LevelSystem::RandomArea(shared_ptr<Level> level) {
   return node.ExtraInfo();
 }
 
+vector<shared_ptr<Area>> LevelSystem::GetAreasInLevel(shared_ptr<Level> level) {
+  auto nodes = level->graph->GetNodeVector();
+  vector<shared_ptr<Area>> areas;
+  vector<NavGraphNode<shared_ptr<Area>>>::iterator it;
+  for (it = nodes.begin(); it != nodes.end(); ++it) {
+    areas.push_back(it->ExtraInfo());
+  }
+  return areas;
+}
+
 void LevelSystem::AddGateway(shared_ptr<Area> from, shared_ptr<Area> to) {
   auto gateway = make_shared<Gateway>(from, to);
   from->gateway = gateway;
