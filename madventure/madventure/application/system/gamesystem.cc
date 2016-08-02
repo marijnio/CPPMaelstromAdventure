@@ -26,16 +26,27 @@ GameSystem::~GameSystem() {
 void GameSystem::Init() {
   std::cout << "Welcome to Maelstrom Adventure.\n\n";
 
-  // Create world and level.
+  // Create world and first level.
   world_ = make_shared<World>();
   level_system_->setWorld(world_);
-  shared_ptr<Level> current_level_ = level_system_->NewLevel(3, 3);
+  auto first_level = level_system_->NewLevel(3, 3);
 
   // Select starting area.
-  auto area = current_level_->graph->GetNode(0).ExtraInfo();
+  auto area = first_level->graph->GetNode(0).ExtraInfo();
 
   // Create player and place in area.
   player_ = make_shared<Player>(area);
+
+  // Add two extra levels
+  auto second_level = level_system_->NewLevel(3, 3);
+  auto third_level = level_system_->NewLevel(3, 3);
+
+  // Connect the levels with gateways.
+  level_system_->AddGateway(level_system_->RandomArea(first_level),
+                            level_system_->RandomArea(second_level));
+
+  level_system_->AddGateway(level_system_->RandomArea(second_level),
+                            level_system_->RandomArea(third_level));
 }
 
 void GameSystem::Update() {

@@ -3,6 +3,7 @@
 #include <memory>
 
 #include "../graph/GraphNodeTypes.h"
+#include "gateway.h"
 
 using namespace std;
 
@@ -13,4 +14,5 @@ struct Area {
       : node_index(node_index), level(level) {}
   int node_index;
   shared_ptr<Level> level;
+  shared_ptr<Gateway> gateway;
 };

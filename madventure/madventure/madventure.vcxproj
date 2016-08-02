@@ -25,12 +25,15 @@
     <ClCompile Include="application\system\interpretersystem.cc" />
     <ClCompile Include="application\system\commands.cc" />
     <ClCompile Include="application\system\levelsystem.cc" />
+    <ClCompile Include="application\system\unitsystem.cc" />
     <ClCompile Include="main.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\application.h" />
     <ClInclude Include="application\model\area.h" />
     <ClInclude Include="application\model\direction.h" />
+    <ClInclude Include="application\model\enemy.h" />
+    <ClInclude Include="application\model\gateway.h" />
     <ClInclude Include="application\model\level.h" />
     <ClInclude Include="application\model\unit.h" />
     <ClInclude Include="application\model\player.h" />
@@ -47,6 +50,7 @@
     <ClInclude Include="application\system\gamesystem.h" />
     <ClInclude Include="application\system\interpretersystem.h" />
     <ClInclude Include="application\system\levelsystem.h" />
+    <ClInclude Include="application\system\unitsystem.h" />
     <ClInclude Include="application\utility\mathoperations.h" />
     <ClInclude Include="application\utility\priorityqueue.h" />
     <ClInclude Include="application\utility\vector2d.h" />

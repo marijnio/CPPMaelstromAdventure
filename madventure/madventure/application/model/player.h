@@ -9,5 +9,5 @@ using namespace std;
 struct Player : Unit {
   explicit Player(shared_ptr<Area> area) : Unit(area) {}
 
-  char name[13] = "Icarus";
+  char name[13] = "Goliath";
 };

@@ -52,7 +52,6 @@ shared_ptr<Level> LevelSystem::NewLevel(int columns, int rows) {
 
   // Place level in world.
   world_->levels.push_back(level);
-
   return level;
 }
 
@@ -74,4 +73,16 @@ vector<Direction> LevelSystem::GetDirections(shared_ptr<Area> area, vector<int> 
     directions.push_back(Direction(angle));
   }
   return directions;
+}
+
+shared_ptr<Area> LevelSystem::RandomArea(shared_ptr<Level> level) {
+  auto graph = level->graph;
+  auto node = graph->GetNode(graph->RandomNode());
+  return node.ExtraInfo();
+}
+
+void LevelSystem::AddGateway(shared_ptr<Area> from, shared_ptr<Area> to) {
+  auto gateway = make_shared<Gateway>(from, to);
+  from->gateway = gateway;
+  to->gateway = gateway;
 }

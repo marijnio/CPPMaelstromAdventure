@@ -25,6 +25,7 @@
     <ClCompile Include="application\system\levelsystem.cc" />
     <ClCompile Include="application\system\commands.cc" />
     <ClCompile Include="application\system\debugcommands.cc" />
+    <ClCompile Include="application\system\unitsystem.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\application.h">
@@ -54,5 +55,8 @@
     <ClInclude Include="application\system\levelsystem.h" />
     <ClInclude Include="application\system\commands.h" />
     <ClInclude Include="application\system\debugcommands.h" />
+    <ClInclude Include="application\model\enemy.h" />
+    <ClInclude Include="application\system\unitsystem.h" />
+    <ClInclude Include="application\model\gateway.h" />
   </ItemGroup>
 </Project>

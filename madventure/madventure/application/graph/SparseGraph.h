@@ -13,6 +13,8 @@
 #include <vector>
 #include <list>
 #include <cassert>
+#include <cstdlib>
+#include <ctime>
 #include <string>
 #include <iostream>
 
@@ -102,6 +104,25 @@ public:
   //a digraph then the edge connecting the nodes in the opposite direction 
   //will also be removed.
   void  RemoveEdge(int from, int to);
+
+  // Returns the index of a random active node in the graph.
+  int RandomNode()const
+  {
+    int count = 0;
+    vector<int> node_indexes;
+    for (unsigned int n = 0; n < m_Nodes.size(); ++n) {
+      if (m_Nodes[n].Index() != invalid_node_index) {
+        node_indexes.push_back(n);
+        count++;
+      }
+    }
+    if (!node_indexes.empty()) {
+      // Roll for a random position in the node index vector.
+      int roll = rand() % count;
+      return node_indexes.at(roll);
+    }
+    return invalid_node_index;
+  }
 
   //sets the cost of an edge
   void  SetEdgeCost(int from, int to, double cost);
@@ -274,7 +295,7 @@ public:
       SparseGraph<node_type, edge_type>&    G;
 
       //if a graph node is removed, it is not removed from the 
-      //vector of nodes (because that would mean changing all the indices of 
+      //vector of nodes (because that would mean changing all the node_indexes of 
       //all the nodes that have a higher index). This method takes a node
       //iterator as a parameter and assigns the next valid element to it.
       void GetNextValidNode(typename NodeVector::iterator& it)
@@ -334,7 +355,7 @@ public:
       const SparseGraph<node_type, edge_type>&      G;
 
       //if a graph node is removed or switched off, it is not removed from the 
-      //vector of nodes (because that would mean changing all the indices of 
+      //vector of nodes (because that would mean changing all the node_indexes of 
       //all the nodes that have a higher index. This method takes a node
       //iterator as a parameter and assigns the next valid element to it.
       void GetNextValidNode(typename NodeVector::const_iterator& it)
@@ -612,8 +633,8 @@ void SparseGraph<node_type, edge_type>::CullInvalidEdges()
   {
     for (EdgeList::iterator curEdge = (*curEdgeList).begin(); curEdge != (*curEdgeList).end(); ++curEdge)
     {
-      if (m_Nodes[curEdge->To()].Index() == invalid_node_index || 
-          m_Nodes[curEdge->From()].Index() == invalid_node_index)
+      if (m_Nodes[curEdge->To()].Index() == invalid_node_index ||
+        m_Nodes[curEdge->From()].Index() == invalid_node_index)
       {
         curEdge = (*curEdgeList).erase(curEdge);
       }

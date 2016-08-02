@@ -19,6 +19,8 @@ public:
   void setWorld(shared_ptr<World> world) { world_ = world; }
   static int RelativeVectorAngle(const Vector2D alpha, const Vector2D beta);
   vector<Direction> LevelSystem::GetDirections(shared_ptr<Area> area, vector<int> neighbors);
+  shared_ptr<Area> RandomArea(shared_ptr<Level> level);
+  void AddGateway(shared_ptr<Area> from, shared_ptr<Area> to);
 private:
   shared_ptr<World> world_;
 };
