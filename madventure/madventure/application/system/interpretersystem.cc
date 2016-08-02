@@ -50,8 +50,7 @@ void InterpreterSystem::Update() {
     // Not found.
     cout << "Unable to interpret. Type help for a list of commands.\n";
   }
-
-  cout << '\n';
+  cout << "\n";
 }
 
 // C++11 uniform initialization of command maps.

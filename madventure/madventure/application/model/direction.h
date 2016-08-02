@@ -23,7 +23,7 @@ struct Direction {
 
     map<int, string>::iterator it = labels.find(angle);
     if (it == labels.end()) {
-      throw "Angle not found in direction map.";
+      return "NULL";
     }
     return it->second;
   }

@@ -6,10 +6,7 @@
 #include "../graph/SparseGraph.h"
 #include "../model/level.h"
 
-//#include "../event/createlevelevent.h"
-//#include "../component/area.h"
-//#include "../component/player.h"
-//#include "../component/location.h"
+#include "commands.h"
 
 using namespace std;
 
@@ -47,6 +44,9 @@ void GameSystem::Init() {
 
   level_system_->AddGateway(level_system_->RandomArea(second_level),
                             level_system_->RandomArea(third_level));
+
+  InspectCommand().Execute(this, vector<string>());
+  cout << "\n";
 }
 
 void GameSystem::Update() {
