@@ -32,7 +32,7 @@ void GameSystem::Init() {
   shared_ptr<Level> current_level_ = level_system_->NewLevel(3, 3);
 
   // Select starting area.
-  auto area = current_level_->graph->GetNode(4).ExtraInfo();
+  auto area = current_level_->graph->GetNode(0).ExtraInfo();
 
   // Create player and place in area.
   player_ = make_shared<Player>(area);

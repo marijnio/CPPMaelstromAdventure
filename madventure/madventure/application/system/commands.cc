@@ -4,6 +4,7 @@
 
 #include "gamesystem.h"
 #include "../model/area.h"
+#include "../model/direction.h"
 
 void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
   auto player = game_system->player();
@@ -13,6 +14,7 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
   auto neighbors = game_system->levelSystem()->GetNeighboringNodeIndices(area);
 
   vector<int>::iterator it;
+  vector<Direction> directions;
   for (it = neighbors.begin(); it != neighbors.end(); ++it) {
     // For every neighboring node index.
     int index = *it;
@@ -20,7 +22,28 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
     auto neighbor = graph->GetNode(index);
     Vector2D that_position = neighbor.Pos();
     // Find at which angle it is positioned from current node.
-    double angle = LevelSystem::RelativeVectorAngle(this_position, that_position);
+    int angle = LevelSystem::RelativeVectorAngle(this_position, that_position);
+    // Print which direction that angle points to.
+    directions.push_back(Direction(angle));
+  }
+
+  if (directions.empty()) {
+    cout << "You can not move in any direction.\n";
+  } else {
+    vector<Direction>::iterator it;
+    cout << "You can move ";
+    for (it = directions.begin(); it != directions.end(); ++it) {
+      cout << it->Initial();
+
+      // Separate with comma if not at last in map.
+      if (++it != directions.end()) {
+        cout << ", ";
+      }
+      else {
+        cout << ".\n";
+      }
+      --it; // Return iterator to position.
+    }
   }
 
   //auto direction = game_system->levelSystem()->

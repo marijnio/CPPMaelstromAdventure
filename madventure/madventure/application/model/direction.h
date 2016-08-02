@@ -6,7 +6,7 @@
 using namespace std;
 
 struct Direction {
-  explicit Direction(int angle) : angle(angle) {}
+  Direction(int angle) : angle(angle) {}
 
   const int angle;
 
@@ -18,9 +18,13 @@ struct Direction {
   };
 
   int Direction::GetAngle(char initial) {
-    std::map<int, char>::iterator it = initials.find(initial);
+    map<int, char>::iterator it = initials.find(initial);
     assert(it != initials.end());
     return it->second;
+  }
+
+  char Initial() {
+    return Direction::initials.at(angle);
   }
 
   int Opposite() {

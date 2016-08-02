@@ -85,5 +85,6 @@ map<string, Command*> InterpreterSystem::commands = {
   { "quit", new QuitCommand() }
 };
 map<string, Command*> InterpreterSystem::debug_commands = {
-  { "debugposition", new DebugPositionCommand() }
+  { "printposition", new PrintPositionCommand() },
+  { "printpaths", new PrintPathsCommand() }
 };

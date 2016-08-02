@@ -2,8 +2,14 @@
 
 #include "commands.h"
 
-class PositionCommand : public Command {
+class PrintPositionCommand : public Command {
 public:
-  PositionCommand() {}
+  PrintPositionCommand() {}
+  void Execute(GameSystem* game_system, vector<string> words);
+};
+
+class PrintPathsCommand : public Command {
+public:
+  PrintPathsCommand() {}
   void Execute(GameSystem* game_system, vector<string> words);
 };

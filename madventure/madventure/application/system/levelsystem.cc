@@ -7,18 +7,12 @@
 using namespace std;
 
 vector<int> LevelSystem::GetNeighboringNodeIndices(shared_ptr<Area> area) {
-  // Extract graph from area
   auto graph = area->level->graph;
-
-
-  list<NavGraphEdge> edges = graph->GetEdgeList(area->node_index);
+  auto edges = graph->GetEdgeList(area->node_index);
 
   vector<int> indices;
-
   for (list<NavGraphEdge>::iterator it = edges.begin(); it != edges.end(); ++it) {
-    cout << "Edge leading to node with index " << it->To() << " at [";
     Vector2D position = graph->GetNode(it->To()).Pos();
-    cout << position.x << ", " << position.y << "]\n";
     indices.push_back(it->To());
   }
 
@@ -29,10 +23,10 @@ inline int PositiveModulo(int i, int n) {
   return (i % n + n) % n;
 }
 
-double LevelSystem::RelativeVectorAngle(const Vector2D alpha, const Vector2D beta) {
-  // Make a vector that goes from alpha to beta.
-  Vector2D gamma = Vector2D(alpha.x - beta.x, alpha.y - beta.y);
-  double theta = atan2(gamma.x, gamma.y);
+int LevelSystem::RelativeVectorAngle(const Vector2D alpha, const Vector2D beta) {
+  // Make a vector which spans the distance between alpha and beta.
+  Vector2D gamma = Vector2D(beta.x - alpha.x, beta.y - alpha.y);
+  double theta = atan2(gamma.y, gamma.x);
   double pi = atan(1) * 4;
   int degrees = static_cast<int>(round(180 * theta / pi));
   int remainder = PositiveModulo(degrees, 360);
