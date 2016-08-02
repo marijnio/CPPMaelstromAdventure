@@ -2,7 +2,7 @@
 
 #include <cassert>
 #include <map>
-
+#include <string>
 using namespace std;
 
 struct Direction {
@@ -10,21 +10,22 @@ struct Direction {
 
   const int angle;
 
-  map<int, char> Direction::initials = {
-    { 0, 'N' },
-    { 90, 'E' },
-    { 180, 'S' },
-    { 270, 'W' }
+  map<int, string> Direction::labels = {
+    { 0, "NORTH" },
+    { 90, "EAST" },
+    { 180, "SOUTH" },
+    { 270, "WEST" }
   };
 
-  int Direction::GetAngle(char initial) {
-    map<int, char>::iterator it = initials.find(initial);
-    assert(it != initials.end());
-    return it->second;
-  }
 
-  char Initial() {
-    return Direction::initials.at(angle);
+  string Name() {
+    string str = Direction::labels.at(angle);
+
+    map<int, string>::iterator it = labels.find(angle);
+    if (it == labels.end()) {
+      throw "Angle not found in direction map.";
+    }
+    return it->second;
   }
 
   int Opposite() {

@@ -9,23 +9,8 @@
 void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
   auto player = game_system->player();
   auto area = player->area;
-  auto graph = area->level->graph;
-  Vector2D this_position = graph->GetNode(area->node_index).Pos();
   auto neighbors = game_system->levelSystem()->GetNeighboringNodeIndices(area);
-
-  vector<int>::iterator it;
-  vector<Direction> directions;
-  for (it = neighbors.begin(); it != neighbors.end(); ++it) {
-    // For every neighboring node index.
-    int index = *it;
-    // Get node and its position.
-    auto neighbor = graph->GetNode(index);
-    Vector2D that_position = neighbor.Pos();
-    // Find at which angle it is positioned from current node.
-    int angle = LevelSystem::RelativeVectorAngle(this_position, that_position);
-    // Print which direction that angle points to.
-    directions.push_back(Direction(angle));
-  }
+  auto directions = game_system->levelSystem()->GetDirections(area, neighbors);
 
   if (directions.empty()) {
     cout << "You can not move in any direction.\n";
@@ -33,7 +18,7 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
     vector<Direction>::iterator it;
     cout << "You can move ";
     for (it = directions.begin(); it != directions.end(); ++it) {
-      cout << it->Initial();
+      cout << it->Name();
 
       // Separate with comma if not at last in map.
       if (++it != directions.end()) {
@@ -46,8 +31,6 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
     }
   }
 
-  //auto direction = game_system->levelSystem()->
-
   //timeComponent.printTime();
   //areaComponent.printWeatherDescription();
   //areaComponent.printEnemies();
@@ -55,7 +38,6 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
 }
 
 void GoCommand::Execute(GameSystem* game_system, vector<string> words) {
-
   // Extract direction to go to.
   if (words.size() <= 1) {
     cout << "Go where?\n";
@@ -63,19 +45,34 @@ void GoCommand::Execute(GameSystem* game_system, vector<string> words) {
   }
 
   string pronoun = words.at(1);
-  char initial = pronoun.at(0);
 
-  // Verify if player can go into that direction.
+  // Proceed to verify if player can go into that direction.
 
-  // Move player into that direction.
+  auto player = game_system->player();
+  auto area = player->area;
+  auto graph = area->level->graph;
+  Vector2D this_position = graph->GetNode(area->node_index).Pos();
 
-  // Perform inspect command.
+  // For every edge, if its direction name matches the pronoun,
+  // move towards node to which the edge points to.
 
+  auto edges = graph->GetEdgeList(area->node_index);
+  list<NavGraphEdge>::iterator it;
+  for (it = edges.begin(); it != edges.end(); ++it) {
+    auto node = graph->GetNode(it->To());
+    Vector2D that_position = node.Pos();
+    // Find at which angle it is positioned from current node.
+    int angle = LevelSystem::RelativeVectorAngle(this_position, that_position);
 
-  //auto player = game_system->player();
-  //auto area = player->area;
-
-  //auto directions = game_system->levelSystem()->GetNeighboringNodeIndices(area);
+    if (Direction(angle).Name() == pronoun) {
+      // Match found. Move player towards connected node.
+      player->area = node.ExtraInfo();
+      // Perform inspect command.
+      InspectCommand().Execute(game_system, vector<string>());
+      return;
+    }
+  }
+  cout << "You can not move into that direction.\n";
 }
 
 void HelpCommand::Execute(GameSystem* game_system, vector<string> words) {

@@ -15,7 +15,6 @@ vector<int> LevelSystem::GetNeighboringNodeIndices(shared_ptr<Area> area) {
     Vector2D position = graph->GetNode(it->To()).Pos();
     indices.push_back(it->To());
   }
-
   return indices;
 }
 
@@ -55,4 +54,24 @@ shared_ptr<Level> LevelSystem::NewLevel(int columns, int rows) {
   world_->levels.push_back(level);
 
   return level;
+}
+
+
+vector<Direction> LevelSystem::GetDirections(shared_ptr<Area> area, vector<int> neighbors) {
+  auto graph = area->level->graph;
+  Vector2D this_position = graph->GetNode(area->node_index).Pos();
+  vector<int>::iterator it;
+  vector<Direction> directions;
+  for (it = neighbors.begin(); it != neighbors.end(); ++it) {
+    // For every neighboring node index.
+    int index = *it;
+    // Get node and its position.
+    auto neighbor = graph->GetNode(index);
+    Vector2D that_position = neighbor.Pos();
+    // Find at which angle it is positioned from current node.
+    int angle = LevelSystem::RelativeVectorAngle(this_position, that_position);
+    // Add the direction of that angle to the list.
+    directions.push_back(Direction(angle));
+  }
+  return directions;
 }
