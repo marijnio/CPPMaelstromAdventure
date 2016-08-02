@@ -12,11 +12,13 @@
 
 class LevelSystem {
 public:
-  LevelSystem() {};
+  LevelSystem() {
+    world_ = make_shared<World>();
+  };
 
   shared_ptr<Level> NewLevel(int columns, int row);
-  vector<int> GetNeighboringNodeIndices(shared_ptr<Area> area);
-  void setWorld(shared_ptr<World> world) { world_ = world; }
+  void AddLevel(shared_ptr<Level> level) { world_->levels.push_back(level); }
+  vector<int> NeighboringNodeIndexes(shared_ptr<Area> area);
   static int RelativeVectorAngle(const Vector2D alpha, const Vector2D beta);
   vector<Direction> LevelSystem::GetDirections(shared_ptr<Area> area, vector<int> neighbors);
   shared_ptr<Area> RandomArea(shared_ptr<Level> level);

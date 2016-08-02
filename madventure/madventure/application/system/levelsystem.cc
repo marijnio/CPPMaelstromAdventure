@@ -6,16 +6,16 @@
 
 using namespace std;
 
-vector<int> LevelSystem::GetNeighboringNodeIndices(shared_ptr<Area> area) {
+vector<int> LevelSystem::NeighboringNodeIndexes(shared_ptr<Area> area) {
   auto graph = area->level->graph;
   auto edges = graph->GetEdgeList(area->node_index);
 
-  vector<int> indices;
+  vector<int> indexes;
   for (list<NavGraphEdge>::iterator it = edges.begin(); it != edges.end(); ++it) {
     Vector2D position = graph->GetNode(it->To()).Pos();
-    indices.push_back(it->To());
+    indexes.push_back(it->To());
   }
-  return indices;
+  return indexes;
 }
 
 inline int PositiveModulo(int i, int n) {

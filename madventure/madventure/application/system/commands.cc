@@ -9,7 +9,7 @@
 #include "../utility/grammar.h"
 
 void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
-  auto player = game_system->player();
+  auto player = game_system->unit_system()->player();
   auto area = player->area;
 
   /* Print gateway */
@@ -24,8 +24,8 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
 
   /* Print directions */
   vector<string> strings;
-  auto neighbors = game_system->levelSystem()->GetNeighboringNodeIndices(area);
-  auto directions = game_system->levelSystem()->GetDirections(area, neighbors);
+  auto neighbors = game_system->level_system()->NeighboringNodeIndexes(area);
+  auto directions = game_system->level_system()->GetDirections(area, neighbors);
 
   if (!directions.empty()) {
     vector<Direction>::iterator it;
@@ -55,7 +55,7 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
 }
 
 void GoCommand::Execute(GameSystem* game_system, vector<string> words) {
-  auto player = game_system->player();
+  auto player = game_system->unit_system()->player();
   auto area = player->area;
   auto graph = area->level->graph;
 
@@ -95,7 +95,8 @@ void GoCommand::Execute(GameSystem* game_system, vector<string> words) {
   
   if (destination) {
     // Move player towards connected node.
-    game_system->unitSystem()->MoveUnit(player, destination);
+    game_system->unit_system()->MoveUnit(player, destination);
+    cout << "Moved " << pronoun << ".\n";
     // Perform inspect command.
     InspectCommand().Execute(game_system, vector<string>());
     return;
@@ -106,21 +107,16 @@ void GoCommand::Execute(GameSystem* game_system, vector<string> words) {
 }
 
 void HelpCommand::Execute(GameSystem* game_system, vector<string> words) {
-  map<string, Command*> commands = game_system->interpreterSystem()->commands;
-  map<string, Command*>::iterator it;
   cout << "Type any of the following commands to play: ";
-  for (it = commands.begin(); it != commands.end(); ++it) {
-    string name = it->first;
-    cout << name;
 
-    // Separate with comma if not at last in map.
-    if (++it != commands.end()) {
-      cout << ", ";
-    } else {
-      cout << ".\n";
-    }
-    --it; // Return iterator to position.
+  // Print all available commands.
+  vector<string> strings;
+  map<string, Command*> commands = game_system->interpreter_system()->commands;
+  map<string, Command*>::iterator it;
+  for (it = commands.begin(); it != commands.end(); ++it) {
+    strings.push_back(it->first);
   }
+  cout << EnumerateWords(strings) << "\n";
 }
 
 void QuitCommand::Execute(GameSystem* game_system, vector<string> words) {

@@ -21,10 +21,9 @@ public:
   void Quit() { finished_ = true; }
 
   bool is_finished() { return finished_; }
-  InterpreterSystem* interpreterSystem() { return interpreter_system_; }
-  LevelSystem* levelSystem() { return level_system_; }
-  UnitSystem* unitSystem() { return unit_system_; }
-  shared_ptr<Player> player() { return player_; }
+  InterpreterSystem* interpreter_system() { return interpreter_system_; }
+  LevelSystem* level_system() { return level_system_; }
+  UnitSystem* unit_system() { return unit_system_; }
 
 private:
   bool finished_;
@@ -32,7 +31,4 @@ private:
   InterpreterSystem* interpreter_system_;
   LevelSystem* level_system_;
   UnitSystem* unit_system_;
-
-  shared_ptr<World> world_;
-  shared_ptr<Player> player_;
 };
