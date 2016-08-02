@@ -10,7 +10,8 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
   auto player = game_system->player();
   auto area = player->area;
 
-  auto directions = game_system->levelSystem()->GetNeighboringNodeIndices(area);
+  auto neighbors = game_system->levelSystem()->GetNeighboringNodeIndices(area);
+  //auto direction = game_system->levelSystem()->
 
   //timeComponent.printTime();
   //areaComponent.printWeatherDescription();

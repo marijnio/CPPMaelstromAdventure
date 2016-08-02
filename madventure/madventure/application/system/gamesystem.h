@@ -30,6 +30,4 @@ private:
 
   shared_ptr<World> world_;
   shared_ptr<Player> player_;
-
-  shared_ptr<Level> NewLevel(int columns, int row);
 };
