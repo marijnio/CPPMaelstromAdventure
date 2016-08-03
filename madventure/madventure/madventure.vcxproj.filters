@@ -26,6 +26,7 @@
     <ClCompile Include="application\system\commands.cc" />
     <ClCompile Include="application\system\debugcommands.cc" />
     <ClCompile Include="application\system\unitsystem.cc" />
+    <ClCompile Include="application\system\gameinfoparser.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\application.h">
@@ -60,5 +61,12 @@
     <ClInclude Include="application\model\gateway.h" />
     <ClInclude Include="application\utility\mymath.h" />
     <ClInclude Include="application\utility\mygrammar.h" />
+    <ClInclude Include="application\utility\json.hpp" />
+    <ClInclude Include="application\system\gameinfoparser.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="application\assets\enemy_types.json" />
+    <None Include="application\assets\area_description.json" />
+    <None Include="application\assets\enemy_modifiers.json" />
   </ItemGroup>
 </Project>

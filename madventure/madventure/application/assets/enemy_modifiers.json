@@ -1,0 +1,37 @@
+[
+  {
+    "affix": "TWO-HEADED",
+    "stamina": 20,
+    "strength": 20,
+    "defense": 0,
+    "agility": -20
+  },
+  {
+    "affix": "STONE",
+    "stamina": 0,
+    "strength": 20,
+    "defense": 30,
+    "agility": -50
+  },
+  {
+    "affix": "ELECTRIC",
+    "stamina": 0,
+    "strength": 20,
+    "defense": -50,
+    "agility": 30
+  },
+  {
+    "affix": "FIRE-BREATHING",
+    "stamina": -40,
+    "strength": 40,
+    "defense": 0,
+    "agility": 0
+  },
+  {
+    "affix": "UNDEAD",
+    "stamina": -20,
+    "strength": 30,
+    "defense": 0,
+    "agility": -20
+  }
+]

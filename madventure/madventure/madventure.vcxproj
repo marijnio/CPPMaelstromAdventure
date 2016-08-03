@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="application\application.cc" />
     <ClCompile Include="application\system\debugcommands.cc" />
+    <ClCompile Include="application\system\gameinfoparser.cc" />
     <ClCompile Include="application\system\gamesystem.cc" />
     <ClCompile Include="application\system\interpretersystem.cc" />
     <ClCompile Include="application\system\commands.cc" />
@@ -47,16 +48,23 @@
     <ClInclude Include="application\graph\NodeTypeEnumerations.h" />
     <ClInclude Include="application\graph\SparseGraph.h" />
     <ClInclude Include="application\system\debugcommands.h" />
+    <ClInclude Include="application\system\gameinfoparser.h" />
     <ClInclude Include="application\system\gamesystem.h" />
     <ClInclude Include="application\system\interpretersystem.h" />
     <ClInclude Include="application\system\levelsystem.h" />
     <ClInclude Include="application\system\unitsystem.h" />
+    <ClInclude Include="application\utility\json.hpp" />
     <ClInclude Include="application\utility\mymath.h" />
     <ClInclude Include="application\utility\mathoperations.h" />
     <ClInclude Include="application\utility\priorityqueue.h" />
     <ClInclude Include="application\utility\mygrammar.h" />
     <ClInclude Include="application\utility\vector2d.h" />
     <ClInclude Include="application\system\commands.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="application\assets\area_description.json" />
+    <None Include="application\assets\enemy_modifiers.json" />
+    <None Include="application\assets\enemy_types.json" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C9D0450B-FECC-4931-A359-4B677FA59979}</ProjectGuid>

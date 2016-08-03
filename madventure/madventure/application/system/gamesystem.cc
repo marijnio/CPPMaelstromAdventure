@@ -8,6 +8,8 @@
 #include "../utility/mymath.h"
 #include "commands.h"
 
+#include "gameinfoparser.h"
+
 using namespace std;
 
 GameSystem::GameSystem() {
@@ -16,6 +18,8 @@ GameSystem::GameSystem() {
   interpreter_system_ = new InterpreterSystem(this);
   unit_system_ = new UnitSystem();
   level_system_ = new LevelSystem();
+
+  GameInfoParser().ReadJson();
 }
 
 GameSystem::~GameSystem() {

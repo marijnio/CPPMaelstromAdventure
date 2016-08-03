@@ -1,0 +1,51 @@
+[
+  {
+	"name": "SERPENT",
+	"stamina":  80,
+	"strength": 100,
+	"defense":  80,
+	"agility":  130
+  },
+  {
+	"name": "DRAGON",
+	"stamina":  120,
+	"strength": 120,
+	"defense":  80,
+	"agility":  70
+  },
+  {
+	"name": "OCTOPUS",
+	"stamina":  100,
+	"strength": 130,
+	"defense":  100,
+	"agility":  60
+  },
+  {
+	"name": "SQUID",
+	"stamina":  80,
+	"strength": 100,
+	"defense":  80,
+	"agility":  50
+  },
+  {
+	"name": "WHALE",
+	"stamina":  100,
+	"strength": 80,
+	"defense":  130,
+	"agility":  100
+  },
+  {
+	"name": "MEDUSA",
+	"stamina":  50,
+	"strength": 60,
+	"defense":  80,
+	"agility":  50
+  },
+  {
+	"name": "NAUTILUS",
+	"stamina":  80,
+	"strength": 100,
+	"defense":  80,
+	"agility":  50
+  }
+]

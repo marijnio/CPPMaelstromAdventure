@@ -1,0 +1,60 @@
+{
+	"GameData" : {
+		"Language_en_US" : [{
+				"tag" : "TXT_KEY_BEAUFORT_DESCRIPTION_0",
+				"text" : "The sea is as clear as a mirror."
+			}, {
+				"tag" : "TXT_KEY_BEAUFORT_DESCRIPTION_1",
+				"text" : "Slight ripples are visible in the sea."
+			}, {
+				"tag" : "TXT_KEY_BEAUFORT_DESCRIPTION_2",
+				"text" : "A light breeze causes the sails to rustle."
+			}, {
+				"tag" : "TXT_KEY_BEAUFORT_DESCRIPTION_3",
+				"text" : "A steady breeze is blowing."
+			}, {
+				"tag" : "TXT_KEY_BEAUFORT_DESCRIPTION_4",
+				"text" : "A moderate breeze is revealing whitecaps."
+			}, {
+				"tag" : "TXT_KEY_BEAUFORT_DESCRIPTION_5",
+				"text" : "A fresh wind is blowing through the sails."
+			}, {
+				"tag" : "TXT_KEY_BEAUFORT_DESCRIPTION_6",
+				"text" : "You can hear a howling whistle in the strong wind."
+			}, {
+				"tag" : "TXT_KEY_BEAUFORT_DESCRIPTION_7",
+				"text" : "Streaks of white foam appear in the stormy wind."
+			}, {
+				"tag" : "TXT_KEY_BEAUFORT_DESCRIPTION_8",
+				"text" : "The waves in the storm make your ship rock back and forth."
+			}, {
+				"tag" : "TXT_KEY_BEAUFORT_DESCRIPTION_9",
+				"text" : "A blinding spray drives in the raging storm."
+			}, {
+				"tag" : "TXT_KEY_BEAUFORT_DESCRIPTION_10",
+				"text" : "A storm is raging. Your ship barely holds its fury."
+			}, {
+				"tag" : "TXT_KEY_BEAUFORT_DESCRIPTION_11",
+				"text" : "The sea is heaving in mountainous waves from the blasting hurricane."
+			}, {
+				"tag" : "TXT_KEY_BEAUFORT_DESCRIPTION_12",
+				"text" : "You are in the most terrible hurricane ever to come out of the heavens."
+			}, {
+				"tag" : "TXT_KEY_TIME_DESCRIPTION_MORNING",
+				"text" : "The sun is rising."
+			}, {
+				"tag" : "TXT_KEY_TIME_DESCRIPTION_NOON",
+				"text" : "The sun reached its zenith."
+			}, {
+				"tag" : "TXT_KEY_TIME_DESCRIPTION_AFTERNOON",
+				"text" : "The sun is descending."
+			}, {
+				"tag" : "TXT_KEY_TIME_DESCRIPTION_EVENING",
+				"text" : "The sun is setting."
+			}, {
+				"tag" : "TXT_KEY_TIME_DESCRIPTION_NIGHT",
+				"text" : "Night has fallen."
+			}
+		]
+	}
+}
