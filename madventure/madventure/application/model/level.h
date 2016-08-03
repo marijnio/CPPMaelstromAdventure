@@ -10,7 +10,12 @@
 struct Level {
   explicit Level(shared_ptr<SparseGraph<NavGraphNode<shared_ptr<Area>>,
                  NavGraphEdge>> graph)
-      : graph(graph) {}
-
+      : graph(graph) {
+    time_ = rand() % (24);
+  }
+  int time_;
+  void IncrementTime(int amount) {
+    time_ = (time_ + amount) % 24;
+  }
   shared_ptr<SparseGraph<NavGraphNode<shared_ptr<Area>>, NavGraphEdge>> graph;
 };

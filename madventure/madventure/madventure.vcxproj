@@ -22,6 +22,7 @@
     <ClCompile Include="application\application.cc" />
     <ClCompile Include="application\system\debugcommands.cc" />
     <ClCompile Include="application\system\gameinfoparser.cc" />
+    <ClCompile Include="application\system\gamelocale.cc" />
     <ClCompile Include="application\system\gamesystem.cc" />
     <ClCompile Include="application\system\interpretersystem.cc" />
     <ClCompile Include="application\system\commands.cc" />
@@ -49,6 +50,7 @@
     <ClInclude Include="application\graph\SparseGraph.h" />
     <ClInclude Include="application\system\debugcommands.h" />
     <ClInclude Include="application\system\gameinfoparser.h" />
+    <ClInclude Include="application\system\gamelocale.h" />
     <ClInclude Include="application\system\gamesystem.h" />
     <ClInclude Include="application\system\interpretersystem.h" />
     <ClInclude Include="application\system\levelsystem.h" />

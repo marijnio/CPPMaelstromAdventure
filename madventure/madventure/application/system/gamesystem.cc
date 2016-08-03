@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <assert.h>
+#include <math.h>
 
 #include "gamesystem.h"
 #include "../graph/SparseGraph.h"
@@ -18,8 +19,7 @@ GameSystem::GameSystem() {
   interpreter_system_ = new InterpreterSystem(this);
   unit_system_ = new UnitSystem();
   level_system_ = new LevelSystem();
-
-  area_descriptions_ = GameInfoParser().GetAreaDescriptions("application/assets/area_description.json");
+  game_locale_ = new GameLocale();
 }
 
 GameSystem::~GameSystem() {
@@ -32,6 +32,9 @@ void GameSystem::Init() {
   // Initialize the world with a level.
   auto first_level = level_system_->NewLevel(3, 3);
   level_system_->AddLevel(first_level);
+
+  // Init first level time to 12:00.
+  first_level->time_ = 12;
 
   // Select starting area.
   auto area = first_level->graph->GetNode(0).ExtraInfo();
@@ -76,11 +79,4 @@ void GameSystem::InjectUnits(shared_ptr<Level> level) {
 
 void GameSystem::Update() {
   interpreter_system_->Update();
-}
-
-string GameSystem::GetAreaDescription(int climate) {
-  string tag;
-  tag.append("TXT_KEY_BEAUFORT_DESCRIPTION_");
-  tag.append(to_string(climate));
-  return area_descriptions_.at(tag);
 }

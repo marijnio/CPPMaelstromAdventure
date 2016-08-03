@@ -33,6 +33,11 @@ void InterpreterSystem::Update() {
     istream_iterator<string>(),
     back_inserter(words));
 
+  if (words.empty()) {
+    cout << "No command received. Type help for a list of commands.\n\n";
+    return;
+  }
+
   string keyword = words[0];
 
   // Find match for keyword in known commands map.
@@ -46,11 +51,12 @@ void InterpreterSystem::Update() {
   if (c != nullptr) {
     // Found, execute.
     c->Execute(game_system_, words);
+    cout << "\n";
   } else {
     // Not found.
-    cout << "Unable to interpret. Type help for a list of commands.\n";
+    cout << "Unable to interpret. Type help for a list of commands.\n\n";
+    return;
   }
-  cout << "\n";
 }
 
 // C++11 uniform initialization of command maps.

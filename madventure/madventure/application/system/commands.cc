@@ -12,9 +12,16 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
   auto player = game_system->unit_system()->player();
   auto area = player->area;
 
-  /* Print area description */
-  auto description = game_system->GetAreaDescription(area->climate);
+  string description;
+  /* Print time description. */
+  description = game_system->game_locale()->GetTimeDescription(area->level->time_);
   cout << description << "\n";
+
+  /* Print area description. */
+  if (!area->gateway) { // Only if there is no gateway.
+    description = game_system->game_locale()->GetAreaDescription(area->climate);
+    cout << description << "\n";
+  }
 
   /* Print gateway */
   if (area->gateway) {
@@ -100,6 +107,7 @@ void GoCommand::Execute(GameSystem* game_system, vector<string> words) {
   if (destination) {
     // Move player towards connected node.
     game_system->unit_system()->MoveUnit(player, destination);
+    area->level->IncrementTime(1); // Increment level time by one hour
     cout << "Moved " << pronoun << ".\n";
     // Perform inspect command.
     InspectCommand().Execute(game_system, vector<string>());
