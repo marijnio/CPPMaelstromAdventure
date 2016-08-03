@@ -12,6 +12,10 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
   auto player = game_system->unit_system()->player();
   auto area = player->area;
 
+  /* Print area description */
+  auto description = game_system->GetAreaDescription(area->climate);
+  cout << description << "\n";
+
   /* Print gateway */
   if (area->gateway) {
     if (area->gateway->from == area) {

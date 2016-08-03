@@ -19,7 +19,7 @@ GameSystem::GameSystem() {
   unit_system_ = new UnitSystem();
   level_system_ = new LevelSystem();
 
-  GameInfoParser().ReadJson();
+  area_descriptions_ = GameInfoParser().GetAreaDescriptions("application/assets/area_description.json");
 }
 
 GameSystem::~GameSystem() {
@@ -76,4 +76,11 @@ void GameSystem::InjectUnits(shared_ptr<Level> level) {
 
 void GameSystem::Update() {
   interpreter_system_->Update();
+}
+
+string GameSystem::GetAreaDescription(int climate) {
+  string tag;
+  tag.append("TXT_KEY_BEAUFORT_DESCRIPTION_");
+  tag.append(to_string(climate));
+  return area_descriptions_.at(tag);
 }

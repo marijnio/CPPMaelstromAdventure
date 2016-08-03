@@ -8,8 +8,15 @@
 using namespace std;
 using json = nlohmann::json;
 
+enum DataType {
+  kAreaDescription
+};
+
 class GameInfoParser {
 public:
   GameInfoParser() {}
-  json ReadJson();
+
+  map<string, string> GetAreaDescriptions(string url);
+private:
+  json ReadJson(string url);
 };

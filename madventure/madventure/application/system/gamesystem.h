@@ -25,6 +25,8 @@ public:
   LevelSystem* level_system() { return level_system_; }
   UnitSystem* unit_system() { return unit_system_; }
 
+  string GetAreaDescription(int climate);
+
 private:
   bool finished_;
 
@@ -33,4 +35,6 @@ private:
   UnitSystem* unit_system_;
 
   void InjectUnits(shared_ptr<Level> level);
+
+  map<string, string> area_descriptions_;
 };
