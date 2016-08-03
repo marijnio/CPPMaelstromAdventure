@@ -18,5 +18,11 @@ json GameInfoParser::ReadJson() {
   // create JSON from stream
   json j_complete(ss);
   std::cout << std::setw(2) << j_complete << "\n\n";
+
+  // iterate the array
+  for (json::iterator it = j_complete.begin(); it != j_complete.end(); ++it) {
+    std::cout << *it << "\n\n";
+  }
+
   return j_complete;
 }
