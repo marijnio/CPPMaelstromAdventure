@@ -25,6 +25,7 @@
 #include "../utility/priorityqueue.h"
 
 
+
 //----------------------------- Graph_SearchDFS -------------------------------
 //
 //  class to implement a depth first search. 
@@ -713,9 +714,9 @@ private:
       //now to test the edges attached to this node
       graph_type::ConstEdgeIterator ConstEdgeItr(m_Graph, best);
 
-      for (const Edge* pE=ConstEdgeItr.beg(); !ConstEdgeItr.end(); pE=ConstEdgeItr.nxt())
+      for (const Edge* pE=ConstEdgeItr.begin(); !ConstEdgeItr.end(); pE=ConstEdgeItr.next())
       {
-        double Priority = pE->Cost;
+        double Priority = pE->Cost();
 
         if (m_Fringe[pE->To()] == 0)
         {

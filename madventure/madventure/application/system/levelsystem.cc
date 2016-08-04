@@ -97,15 +97,13 @@ void LevelSystem::AddGateway(shared_ptr<Area> from, shared_ptr<Area> to) {
   to->gateway = gateway;
 }
 
-void LevelSystem::PrintMap(shared_ptr<SparseGraph<NavGraphNode<shared_ptr<Area>>, NavGraphEdge>> graph, shared_ptr<Player> player, bool show_all) {
+void LevelSystem::PrintMap(shared_ptr<SparseGraph<NavGraphNode<shared_ptr<Area>>,
+                           NavGraphEdge>> graph, shared_ptr<Player> player,
+                           bool show_all) {
   int low_x = static_cast<int>(graph->LowestNodeX());
   int low_y = static_cast<int>(graph->LowestNodeY());
   int high_x = static_cast<int>(graph->HighestNodeX());
   int high_y = static_cast<int>(graph->HighestNodeY());
-
-  cout << "Map dimensions:\n";
-  cout << "{ " << low_x << ", " << low_y << "}\n";
-  cout << "{ " << high_x << ", " << high_y << "}\n";
 
   // Retrieve all graph nodes.
   auto nodes = graph->GetNodeVector();
