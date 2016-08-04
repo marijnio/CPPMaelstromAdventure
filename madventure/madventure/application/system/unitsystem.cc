@@ -15,6 +15,7 @@ shared_ptr<Player> UnitSystem::SpawnPlayer(shared_ptr<Area> area) {
   return player;
 }
 
-void UnitSystem::MoveUnit(shared_ptr<Unit> unit, shared_ptr<Area> destination) {
+void UnitSystem::MoveUnit(shared_ptr<Player> unit, shared_ptr<Area> destination) {
   unit->area = destination;
+  unit->area->visited = true;
 }

@@ -16,10 +16,12 @@ struct Area {
   explicit Area(int node_index, shared_ptr<Level> level)
       : node_index(node_index), level(level) {
     climate = rand() % (12);
+    visited = false;
   }
   int node_index;
   shared_ptr<Level> level;
   shared_ptr<Gateway> gateway;
   int climate;
+  bool visited;
 };
 
