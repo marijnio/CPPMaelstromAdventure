@@ -96,3 +96,60 @@ void LevelSystem::AddGateway(shared_ptr<Area> from, shared_ptr<Area> to) {
   from->gateway = gateway;
   to->gateway = gateway;
 }
+
+void LevelSystem::PrintMap(shared_ptr<SparseGraph<NavGraphNode<shared_ptr<Area>>, NavGraphEdge>> graph, shared_ptr<Player> player, bool show_all) {
+  int low_x = static_cast<int>(graph->LowestNodeX());
+  int low_y = static_cast<int>(graph->LowestNodeY());
+  int high_x = static_cast<int>(graph->HighestNodeX());
+  int high_y = static_cast<int>(graph->HighestNodeY());
+
+  cout << "Map dimensions:\n";
+  cout << "{ " << low_x << ", " << low_y << "}\n";
+  cout << "{ " << high_x << ", " << high_y << "}\n";
+
+  // Retrieve all graph nodes.
+  auto nodes = graph->GetNodeVector();
+  // Print the map with row going from high x to low x.
+  for (int i = high_x; i >= low_x; i--) {
+    // For every node.
+    vector<NavGraphNode<shared_ptr<Area>>>::iterator it;
+    for (it = nodes.begin(); it != nodes.end(); ++it) {
+      // Retrieve node x position.
+      double node_x = static_cast<int>(round(it->Pos().x));
+      // Is the node positioned in the row to print?
+      if (node_x == i) {
+        if (it->ExtraInfo()->visited == true || show_all == true) {
+          if (player->area->node_index == it->Index()) {
+            // Player present in area.
+            cout << "x";
+          } else if (it->ExtraInfo()->gateway) {
+            // Gateway present in area.
+            if (it->ExtraInfo()->gateway->from == it->ExtraInfo()) {
+              cout << "w";
+            } else {
+              cout << "v";
+            }
+          } else {
+            cout << "o";
+          }
+        }
+        else {
+          cout << "~";
+        }
+        double node_y = static_cast<int>(round(it->Pos().y));
+        if (node_y != high_y) {
+          cout << "-";
+        }
+      }
+
+    }
+    cout << "\n";
+    if (i > low_x) {
+      for (int j = low_y; j <= high_y; j++) {
+        cout << "| ";
+      }
+    }
+    cout << "\n";
+  }
+
+}

@@ -7,6 +7,7 @@
 #include "../model/level.h"
 #include "../model/world.h"
 #include "../model/direction.h"
+#include "../model/player.h"
 #include "../graph/SparseGraph.h"
 #include "../graph/GraphEdgeTypes.h"
 
@@ -24,6 +25,7 @@ public:
   shared_ptr<Area> RandomArea(shared_ptr<Level> level);
   vector<shared_ptr<Area>> GetAreasInLevel(shared_ptr<Level> level);
   void AddGateway(shared_ptr<Area> from, shared_ptr<Area> to);
+  void PrintMap(shared_ptr<SparseGraph<NavGraphNode<shared_ptr<Area>>, NavGraphEdge>> graph, shared_ptr<Player> player, bool show_all);
 private:
   shared_ptr<World> world_;
 };

@@ -7,7 +7,9 @@
 using namespace std;
 
 struct Player : Unit {
-  explicit Player(shared_ptr<Area> area) : Unit(area) {}
+  explicit Player(shared_ptr<Area> area) : Unit(area) {
+    area->visited = true;
+  }
 
   char name[13] = "Goliath";
 };

@@ -43,8 +43,8 @@ void GameSystem::Init() {
   unit_system_->SetPlayer(unit_system_->SpawnPlayer(area));
 
   // Add two extra levels
-  auto second_level = level_system_->NewLevel(3, 3);
-  auto third_level = level_system_->NewLevel(3, 3);
+  auto second_level = level_system_->NewLevel(4, 4);
+  auto third_level = level_system_->NewLevel(5, 5);
 
   level_system_->AddLevel(second_level);
   level_system_->AddLevel(third_level);
