@@ -7,6 +7,7 @@
 #include "../graph/GraphNodeTypes.h"
 #include "gateway.h"
 #include "../system/gameinfoparser.h"
+#include "unit.h"
 
 using namespace std;
 
@@ -21,6 +22,7 @@ struct Area {
   int node_index;
   shared_ptr<Level> level;
   shared_ptr<Gateway> gateway;
+  vector<shared_ptr<Unit>> units;
   int climate;
   bool visited;
 };

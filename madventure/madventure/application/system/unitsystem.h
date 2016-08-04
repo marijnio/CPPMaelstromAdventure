@@ -26,5 +26,15 @@ private:
 
 template <typename T>
 void UnitSystem::MoveUnit(shared_ptr<T> unit, shared_ptr<Area> destination) {
+  // Remove the unit from its current location.
+  auto units = unit->area->units;
+  vector<shared_ptr<Unit>>::iterator position = find(units.begin(), units.end(), unit);
+  if (position != units.end()) {
+    units.erase(position);
+  }
+  // Update the reference in the unit.
   unit->area = destination;
+
+  // Add the unit to the new location.
+  destination->units.push_back(unit);
 }

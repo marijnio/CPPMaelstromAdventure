@@ -6,16 +6,29 @@ using namespace std;
 
 shared_ptr<Enemy> UnitSystem::SpawnEnemy(shared_ptr<Area> destination) {
   auto enemy = make_shared<Enemy>(destination);
-  //cout << "Spawning enemy in area " << destination->node_index << ".\n";
+  destination->units.push_back(enemy);
+  //cout << "Spawning enemy in destination " << destination->node_index << ".\n";
   return enemy;
 }
 
-shared_ptr<Player> UnitSystem::SpawnPlayer(shared_ptr<Area> area) {
-  auto player = make_shared<Player>(area);
+shared_ptr<Player> UnitSystem::SpawnPlayer(shared_ptr<Area> destination) {
+  auto player = make_shared<Player>(destination);
+  destination->units.push_back(player);
   return player;
 }
 
 void UnitSystem::MoveUnit(shared_ptr<Player> unit, shared_ptr<Area> destination) {
+  // Remove the unit from its current location.
+  auto units = unit->area->units;
+  vector<shared_ptr<Unit>>::iterator position = find(units.begin(), units.end(), unit);
+  if (position != units.end()) {
+    units.erase(position);
+  }
+  // Update the reference in the unit.
   unit->area = destination;
+
+  // Add the unit to the new location.
+  destination->units.push_back(unit);
+
   unit->area->visited = true;
 }
