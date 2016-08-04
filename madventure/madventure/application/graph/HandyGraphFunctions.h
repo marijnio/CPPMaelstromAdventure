@@ -1,5 +1,5 @@
-#ifndef GRAPH_FUNCS
-#define GRAPH_FUNCS
+#pragma once
+
 //-----------------------------------------------------------------------------
 //
 //  Name:   HandyGraphFunctions.h
@@ -13,6 +13,7 @@
 //          with the SparseGraph class
 //-----------------------------------------------------------------------------
 #include <iostream>
+#include <float.h>
 
 //#include "misc/Cgdi.h"
 #include "../utility/mathoperations.h"
@@ -338,10 +339,10 @@ double GetCostliestGraphEdge(const graph_type& G)
 
   graph_type::ConstNodeIterator NodeItr(G);
   const graph_type::NodeType* pN;
-  for (pN = NodeItr.begin(); !NodeItr.end(); pN=NodeItr.next())
+  for (pN = NodeItr.begin(); !NodeItr.end(); pN = NodeItr.next())
   {
     graph_type::ConstEdgeIterator EdgeItr(G, pN->Index());
-    for (const graph_type::EdgeType* pE = EdgeItr.begin(); !EdgeItr.end(); pE=EdgeItr.next())
+    for (const graph_type::EdgeType* pE = EdgeItr.begin(); !EdgeItr.end(); pE = EdgeItr.next())
     {
       if (pE->Cost() > greatest)greatest = pE->Cost();
     }
@@ -349,5 +350,3 @@ double GetCostliestGraphEdge(const graph_type& G)
 
   return greatest;
 }
-
-#endif

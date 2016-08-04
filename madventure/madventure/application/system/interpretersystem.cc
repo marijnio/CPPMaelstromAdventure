@@ -70,5 +70,6 @@ map<string, Command*> InterpreterSystem::commands = {
 
 map<string, Command*> InterpreterSystem::debug_commands = {
   { "PRINTPOSITION", new PrintPositionCommand() },
-  { "PRINTPATHS", new PrintPathsCommand() }
+  { "PRINTPATHS", new PrintPathsCommand() },
+  { "PRINTMAP", new PrintMapCommand() }
 };

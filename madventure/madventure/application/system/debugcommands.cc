@@ -25,3 +25,14 @@ void PrintPathsCommand::Execute(GameSystem* game_system, vector<string> words) {
       << position.x << ", " << position.y << "}\n";
   }
 }
+
+
+void PrintMapCommand::Execute(GameSystem* game_system, vector<string> words) {
+  auto player = game_system->unit_system()->player();
+  auto area = player->area;
+  auto graph = area->level->graph;
+
+  cout << "Map dimensions:\n";
+  cout << "{ " << graph->LowestNodeX() << ", " << graph->LowestNodeY() << "}\n";
+  cout << "{ " << graph->HighestNodeX() << ", " << graph->HighestNodeY() << "}\n";
+}

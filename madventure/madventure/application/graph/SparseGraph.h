@@ -174,6 +174,11 @@ public:
   //is present in the graph
   bool isEdgePresent(int from, int to)const;
 
+  double LowestNodeX()const;
+  double HighestNodeX()const;
+  double LowestNodeY()const;
+  double HighestNodeY()const;
+
   //methods for loading and saving graphs from an open file stream or from
   //a file name 
   bool  Save(const char* FileName)const;
@@ -408,6 +413,8 @@ public:
     };
 
   friend class ConstNodeIterator;
+
+
 };
 
 
@@ -432,19 +439,82 @@ bool SparseGraph<node_type, edge_type>::isNodePresent(int nd)const
 template <class node_type, class edge_type>
 bool SparseGraph<node_type, edge_type>::isEdgePresent(int from, int to)const
 {
-    if (isNodePresent(from) && isNodePresent(from))
+  if (isNodePresent(from) && isNodePresent(from))
+  {
+    for (EdgeList::const_iterator curEdge = m_Edges[from].begin();
+      curEdge != m_Edges[from].end();
+      ++curEdge)
     {
-       for (EdgeList::const_iterator curEdge = m_Edges[from].begin();
-            curEdge != m_Edges[from].end();
-            ++curEdge)
-        {
-          if (curEdge->To() == to) return true;
-        }
-
-        return false;
+      if (curEdge->To() == to) return true;
     }
-    else return false;
+
+    return false;
+  }
+  else return false;
 }
+
+
+//----------------------------- Graph console printing commands ---------------
+template <class node_type, class edge_type>
+double SparseGraph<node_type, edge_type>::LowestNodeX()const {
+  double value = DBL_MAX;
+  Vector2D position;
+  NodeVector::const_iterator curNode = m_Nodes.begin();
+  for (curNode; curNode != m_Nodes.end(); ++curNode) {
+    position = curNode->Pos();
+    double x = position.x;
+    if (x < value) {
+      value = x;
+    }
+  }
+  return value;
+}
+
+template <class node_type, class edge_type>
+double SparseGraph<node_type, edge_type>::HighestNodeX()const {
+  double value = DBL_MIN;
+  Vector2D position;
+  NodeVector::const_iterator curNode = m_Nodes.begin();
+  for (curNode; curNode != m_Nodes.end(); ++curNode) {
+    position = curNode->Pos();
+    double x = position.x;
+    if (x > value) {
+      value = x;
+    }
+  }
+  return value;
+}
+
+template <class node_type, class edge_type>
+double SparseGraph<node_type, edge_type>::LowestNodeY()const {
+  double value = DBL_MAX;
+  Vector2D position;
+  NodeVector::const_iterator curNode = m_Nodes.begin();
+  for (curNode; curNode != m_Nodes.end(); ++curNode) {
+    position = curNode->Pos();
+    double y = position.y;
+    if (y < value) {
+      value = y;
+    }
+  }
+  return value;
+}
+
+template <class node_type, class edge_type>
+double SparseGraph<node_type, edge_type>::HighestNodeY()const {
+  double value = DBL_MIN;
+  Vector2D position;
+  NodeVector::const_iterator curNode = m_Nodes.begin();
+  for (curNode; curNode != m_Nodes.end(); ++curNode) {
+    position = curNode->Pos();
+    double y = position.y;
+    if (y > value) {
+      value = y;
+    }
+  }
+  return value;
+}
+
 //------------------------------ GetNode -------------------------------------
 //
 //  const and non const methods for obtaining a reference to a specific node
@@ -850,5 +920,6 @@ bool SparseGraph<node_type, edge_type>::Load(std::ifstream& stream)
   return true;
 }
    
+
 
 #endif

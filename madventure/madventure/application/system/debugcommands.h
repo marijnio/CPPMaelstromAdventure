@@ -13,3 +13,9 @@ public:
   PrintPathsCommand() {}
   void Execute(GameSystem* game_system, vector<string> words);
 };
+
+class PrintMapCommand : public Command {
+public:
+  PrintMapCommand() {}
+  void Execute(GameSystem* game_system, vector<string> words);
+};
