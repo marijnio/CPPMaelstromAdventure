@@ -18,6 +18,16 @@ class InspectCommand : public Command {
 public:
   InspectCommand() {}
   void Execute(GameSystem* game_system, vector<string> words);
+
+  vector<string> subjects() { return subjects_; }
+
+private:
+  vector<string> subjects_ = {
+    "TIME",
+    "AREA",
+    "DIRECTIONS",
+    "SELF"
+  };
 };
 
 class GoCommand : public Command {

@@ -40,7 +40,7 @@ void GameSystem::Init() {
   auto area = first_level->graph->GetNode(0).ExtraInfo();
 
   // Create player and place in area.
-  unit_system_->SetPlayer(unit_system_->SpawnPlayer(area));
+  unit_system_->SetPlayer(unit_system_->SpawnPlayer(area, 100));
 
   // Add two extra levels
   auto second_level = level_system_->NewLevel(4, 4);
@@ -71,7 +71,7 @@ void GameSystem::InjectUnits(shared_ptr<Level> level) {
     // Insert n enemies based on a Poisson-distribution
     int n = GetPoisson(0.5);
     while (n > 0) {
-      unit_system_->SpawnEnemy(*it);
+      unit_system_->SpawnEnemy(*it, 100);
       n--;
     }
   }

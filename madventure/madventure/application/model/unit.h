@@ -7,7 +7,9 @@
 using namespace std;
 
 struct Unit {
-  explicit Unit(shared_ptr<Area> area) : area(area) {}
+  explicit Unit(shared_ptr<Area> area, int health)
+      : area(area), health(health) {}
 
-  shared_ptr<Area> area;  
+  shared_ptr<Area> area;
+  int health;
 };

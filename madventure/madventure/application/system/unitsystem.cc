@@ -4,15 +4,17 @@
 
 using namespace std;
 
-shared_ptr<Enemy> UnitSystem::SpawnEnemy(shared_ptr<Area> destination) {
-  auto enemy = make_shared<Enemy>(destination);
+shared_ptr<Enemy> UnitSystem::SpawnEnemy(shared_ptr<Area> destination,
+                                         int health) {
+  auto enemy = make_shared<Enemy>(destination, health);
   destination->units.push_back(enemy);
   //cout << "Spawning enemy in destination " << destination->node_index << ".\n";
   return enemy;
 }
 
-shared_ptr<Player> UnitSystem::SpawnPlayer(shared_ptr<Area> destination) {
-  auto player = make_shared<Player>(destination);
+shared_ptr<Player> UnitSystem::SpawnPlayer(shared_ptr<Area> destination,
+                                           int health) {
+  auto player = make_shared<Player>(destination, health);
   destination->units.push_back(player);
   return player;
 }
