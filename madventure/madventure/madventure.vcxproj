@@ -37,6 +37,7 @@
     <ClInclude Include="application\model\enemy.h" />
     <ClInclude Include="application\model\gateway.h" />
     <ClInclude Include="application\model\level.h" />
+    <ClInclude Include="application\model\trap.h" />
     <ClInclude Include="application\model\unit.h" />
     <ClInclude Include="application\model\player.h" />
     <ClInclude Include="application\model\world.h" />

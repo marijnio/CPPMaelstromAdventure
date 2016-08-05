@@ -55,6 +55,12 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
         cout << "An intense columnar vortex funnels water into the clouds.\n";
       }
     }
+
+    /* Print trap */
+    if (area->trap) {
+      cout << "A trap is present.\n";
+      cout << area->trap->difficulty << "\n";
+    }
   }
 
   if (pronoun == subjects.at(1) || default) {
@@ -163,6 +169,13 @@ void GoCommand::Execute(GameSystem* game_system, vector<string> words) {
 
   // No destination set.
   cout << "You can not go into that direction.\n";
+}
+
+void HealCommand::Execute(GameSystem* game_system, vector<string> words) {
+  game_system->unit_system()->player()->health = 100;
+  cout << "You fixed your ship.\n";
+  vector<string> parameters{ "", "SELF" };
+  InspectCommand().Execute(game_system, parameters);
 }
 
 void HelpCommand::Execute(GameSystem* game_system, vector<string> words) {

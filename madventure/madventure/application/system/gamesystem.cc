@@ -6,6 +6,7 @@
 #include "gamesystem.h"
 #include "../graph/SparseGraph.h"
 #include "../model/level.h"
+#include "../model/trap.h"
 #include "../utility/mymath.h"
 #include "commands.h"
 
@@ -57,6 +58,12 @@ void GameSystem::Init() {
                             level_system_->RandomArea(third_level));
 
   InjectUnits(first_level);
+  InjectUnits(second_level);
+  InjectUnits(third_level);
+
+  InjectTraps(first_level, 0.2, 2.0);
+  InjectTraps(second_level, 0.3, 4.0);
+  InjectTraps(third_level, 0.4, 6.0);
 
   HelpCommand().Execute(this, vector<string>());
   InspectCommand().Execute(this, vector<string>());
@@ -68,11 +75,33 @@ void GameSystem::InjectUnits(shared_ptr<Level> level) {
   vector<shared_ptr<Area>>::iterator it;
   for (it = areas.begin(); it != areas.end(); ++it) {
 
-    // Insert n enemies based on a Poisson-distribution
+    // Insert n enemies based on a Poisson-distribution.
     int n = GetPoisson(0.5);
     while (n > 0) {
       unit_system_->SpawnEnemy(*it, 100);
       n--;
+    }
+  }
+}
+
+void GameSystem::InjectTraps(shared_ptr<Level> level, double chance,
+                             double average_difficulty) {
+  auto areas = level_system_->GetAreasInLevel(level);
+  vector<shared_ptr<Area>>::iterator it;
+  for (it = areas.begin(); it != areas.end(); ++it) {
+    // Roll for a random number between 0.0 and 1.0.
+    double roll = ((double)rand() / (double)RAND_MAX);
+
+    if (roll > chance) {
+      // Roll for individual trap difficulty on a normal distribution.
+      random_device rd;
+      default_random_engine generator;
+      generator.seed(rd());
+      normal_distribution<double> distribution(average_difficulty, 1.0);
+      double difficulty = distribution(generator);
+
+      // Insert trap.
+      (*it)->trap = make_shared<Trap>(difficulty);
     }
   }
 }

@@ -36,5 +36,6 @@ private:
   GameLocale* game_locale_;
 
   void InjectUnits(shared_ptr<Level> level);
-
+  void InjectTraps(shared_ptr<Level> level, double chance,
+                   double average_difficulty);
 };

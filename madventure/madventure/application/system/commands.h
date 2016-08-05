@@ -28,6 +28,12 @@ public:
   void Execute(GameSystem* game_system, vector<string> words);
 };
 
+class HealCommand : public Command {
+public:
+  HealCommand() {}
+  void Execute(GameSystem* game_system, vector<string> words);
+};
+
 class HelpCommand : public Command {
 public:
   HelpCommand() {}

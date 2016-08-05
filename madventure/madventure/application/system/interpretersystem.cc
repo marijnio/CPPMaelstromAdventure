@@ -77,6 +77,7 @@ void InterpreterSystem::Update() {
 map<string, Command*> InterpreterSystem::commands = {
   { "GO", new GoCommand() },
   { "INSPECT", new InspectCommand() },
+  { "HEAL", new HealCommand() },
   { "HELP", new HelpCommand() },
   { "QUIT", new QuitCommand() }
 };

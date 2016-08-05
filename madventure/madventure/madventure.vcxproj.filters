@@ -65,6 +65,7 @@
     <ClInclude Include="application\utility\json.hpp" />
     <ClInclude Include="application\system\gameinfoparser.h" />
     <ClInclude Include="application\system\gamelocale.h" />
+    <ClInclude Include="application\model\trap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="application\assets\enemy_types.json" />
