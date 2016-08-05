@@ -48,6 +48,19 @@ void InterpreterSystem::Update() {
     c = FindCommand(debug_commands, keyword);
   }
 
+  if (c == nullptr) {
+    // Not found, try synonyms
+    map<string, vector<string>>::iterator it;
+    if (thesaurus.find(keyword) != thesaurus.end()) {
+      // Synonym found.
+      it = thesaurus.find(keyword);
+      // Get translation and replace given words.
+      words = it->second;
+      // Find command of translation.
+      c = FindCommand(commands, words[0]);
+    }
+  }
+
   if (c != nullptr) {
     // Found, execute.
     c->Execute(game_system_, words);
@@ -66,6 +79,15 @@ map<string, Command*> InterpreterSystem::commands = {
   { "INSPECT", new InspectCommand() },
   { "HELP", new HelpCommand() },
   { "QUIT", new QuitCommand() }
+};
+
+map<string, vector<string>> InterpreterSystem::thesaurus = {
+  { "NORTH", { "GO", "NORTH" }},
+  { "EAST", { "GO", "EAST" }},
+  { "SOUTH", { "GO", "SOUTH" }},
+  { "WEST",{ "GO", "WEST" }},
+  { "DOWN",{ "GO", "DOWN" }},
+  { "UP",{ "GO", "UP" }}
 };
 
 map<string, Command*> InterpreterSystem::debug_commands = {

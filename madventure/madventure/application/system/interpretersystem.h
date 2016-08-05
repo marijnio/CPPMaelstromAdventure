@@ -33,6 +33,8 @@ public:
 
   static map<string, Command*> commands;
   static map<string, Command*> debug_commands;
+  static map<string, vector<string>> thesaurus;
+
 private:
   GameSystem* game_system_;
 

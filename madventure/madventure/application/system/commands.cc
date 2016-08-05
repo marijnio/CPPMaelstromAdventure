@@ -22,9 +22,9 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
   } else {
     pronoun = words.at(1);
 
-    vector<string>::iterator search = find(subjects_.begin(), subjects_.end(), pronoun);
-    if (search == subjects_.end()) {
-      cout << "Unable to inspect unknown subject.\n";
+    vector<string>::iterator search = find(subjects.begin(), subjects.end(), pronoun);
+    if (search == subjects.end()) {
+      cout << "Unable to inspect given subject.\n";
       vector<string> parameters { "", "INSPECT" };
       HelpCommand().Execute(game_system, parameters);
     }
@@ -33,13 +33,13 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
 
   string description;
 
-  if (pronoun == subjects_.at(0)) {
+  if (pronoun == subjects.at(0)) {
     /* Print time description. */
     description = game_system->game_locale()->GetTimeDescription(area->level->time_);
     cout << description << "\n";
   }
 
-  if (pronoun == subjects_.at(1)) {
+  if (pronoun == subjects.at(1)) {
     /* Print area description. */
     if (!area->gateway) { // Only if there is no gateway.
       description = game_system->game_locale()->GetAreaDescription(area->climate);
@@ -57,7 +57,7 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
     }
   }
 
-  if (pronoun == subjects_.at(1) || pronoun == subjects_.at(2) || default) {
+  if (pronoun == subjects.at(1) || default) {
     /* Print directions */
     vector<string> strings;
     auto neighbors = game_system->level_system()->NeighboringNodeIndexes(area);
@@ -87,10 +87,30 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
     }
   }
 
-    //timeComponent.printTime();
-    //areaComponent.printWeatherDescription();
-    //areaComponent.printEnemies();
+  if (pronoun == subjects.at(2)) {
+    /* Print description of player status */
+    int health = player->health;
+    if (health > 95) {
+      cout << "The ship is in perfect shape.\n";
+    } else if (health > 80) {
+      cout << "The ship has a few scratches.\n";
+    } else if (health > 50) {
+      cout << "The ship has taken some damage.\n";
+    } else if (health > 30) {
+      cout << "The ship is in a bad shape.\n";
+    } else if (health > 10) {
+      cout << "The ship can barely hold itself.\n";
+    } else if (health > 0) {
+      cout << "The ship is sinking.\n";
+    }
+  }
 }
+
+vector<string> InspectCommand::subjects = {
+  "TIME",
+  "AREA",
+  "SELF"
+};
 
 void GoCommand::Execute(GameSystem* game_system, vector<string> words) {
   auto player = game_system->unit_system()->player();
@@ -181,10 +201,8 @@ void HelpCommand::Execute(GameSystem* game_system, vector<string> words) {
   }
 
   if (pronoun == "INSPECT") {
-    cout << "Inspect an element in the player area.\n";
-
-    cout << "You can inspect the following elements: ";
-    vector<string> subjects = InspectCommand().subjects();
+    cout << "Use inspect to examine any of the following elements:\n";
+    vector<string> subjects = InspectCommand::subjects;
     cout << EnumerateWords(subjects) << "\n";
     return;
   }
