@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <iterator>
 #include <cassert>
+#include <regex>
 
 #include "interpretersystem.h"
 #include "../event/gamequitevent.h"
@@ -23,7 +24,7 @@ void InterpreterSystem::Update() {
 
   string line;
   getline(cin, line); // Read one line from cin.
-  // Transform input to lower case.
+  // Transform input to upper case.
   std::transform(line.begin(), line.end(), line.begin(), ::toupper);
   stringstream buffer(line);
 
@@ -70,6 +71,27 @@ void InterpreterSystem::Update() {
     cout << "Unable to interpret. Type help for a list of commands.\n\n";
     return;
   }
+}
+
+// Checks if a string contains only alphabetic letters.
+// Uses a C++11 regex function to determinate.
+inline bool ContainsNonAlpha(string word) {
+  return !regex_match(word, regex("^[A-Za-z]+$"));
+}
+
+string InterpreterSystem::RequestWord(string prompt) {
+  cout << prompt;
+
+  string line;
+  getline(cin, line); // Read one line from cin.
+  stringstream buffer(line);
+
+  // Check if the input contains non-alphabetic characters.
+  if (ContainsNonAlpha(line)) {
+    // Ask the word again using a recursive function call.
+    return RequestWord(prompt);
+  }
+  return line;
 }
 
 // C++11 uniform initialization of command maps.

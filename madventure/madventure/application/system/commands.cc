@@ -95,18 +95,19 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
   if (pronoun == subjects.at(2)) {
     /* Print description of player status */
     int health = player->health;
+    string name = player->name;
     if (health > 95) {
-      cout << "The ship is in perfect shape.\n";
+      cout << "The " << name << " is in perfect shape.\n";
     } else if (health > 80) {
-      cout << "The ship has a few scratches.\n";
+      cout << "The " << name << " has a few scratches.\n";
     } else if (health > 50) {
-      cout << "The ship has taken some damage.\n";
+      cout << "The " << name << " has taken some damage.\n";
     } else if (health > 30) {
-      cout << "The ship is in a bad shape.\n";
+      cout << "The " << name << " is in a bad shape.\n";
     } else if (health > 10) {
-      cout << "The ship can barely hold itself.\n";
+      cout << "The " << name << " can barely hold itself.\n";
     } else if (health > 0) {
-      cout << "The ship is sinking.\n";
+      cout << "The " << name << " is sinking.\n";
     }
     cout << "Health: " << health << "\n";
     cout << "Dexterity: " << player->dexterity << "\n";

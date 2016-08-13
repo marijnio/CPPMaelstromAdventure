@@ -30,6 +30,7 @@ public:
   };
 
   void Update();
+  string RequestWord(string prompt);
 
   static map<string, Command*> commands;
   static map<string, Command*> debug_commands;

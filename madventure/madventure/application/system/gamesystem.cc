@@ -28,7 +28,14 @@ GameSystem::~GameSystem() {
 }
 
 void GameSystem::Init() {
-  std::cout << "Welcome to Maelstrom Adventure.\n\n";
+  cout << "Welcome to Maelstrom Adventure.\n\n";
+
+  cout << "Please enter the name of your ship.\n";
+  string name = interpreter_system_->RequestWord("Name: ");
+  cout << endl;
+
+  cout << "The " << name << " has set sail.\n";
+  cout << "Good luck.\n\n";
 
   // Initialize the world with a level.
   auto first_level = level_system_->NewLevel(3, 3);
@@ -41,7 +48,7 @@ void GameSystem::Init() {
   auto area = first_level->graph->GetNode(0).ExtraInfo();
 
   // Create player and place in area.
-  unit_system_->SetPlayer(unit_system_->SpawnPlayer(area, 100));
+  unit_system_->SetPlayer(unit_system_->SpawnPlayer(area, name, 100));
 
   // Add two extra levels
   auto second_level = level_system_->NewLevel(4, 4);
@@ -105,7 +112,6 @@ void GameSystem::InjectTraps(shared_ptr<Level> level, double chance,
       generator.seed(rd());
       normal_distribution<double> distribution(average_difficulty, 1.0);
       double difficulty = distribution(generator);
-      cout << difficulty << "\n";
 
       // Insert trap.
       (*it)->trap = make_shared<Trap>(difficulty);

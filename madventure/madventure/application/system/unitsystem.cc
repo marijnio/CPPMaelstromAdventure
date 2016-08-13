@@ -16,8 +16,8 @@ shared_ptr<Enemy> UnitSystem::SpawnEnemy(shared_ptr<Area> destination,
 }
 
 shared_ptr<Player> UnitSystem::SpawnPlayer(shared_ptr<Area> destination,
-                                           int health) {
-  auto player = make_shared<Player>(destination, health);
+                                           string name, int health) {
+  auto player = make_shared<Player>(destination, name, health);
   destination->units.push_back(player);
   return player;
 }
