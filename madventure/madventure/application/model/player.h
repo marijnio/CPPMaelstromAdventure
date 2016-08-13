@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <string>
 
 #include "unit.h"
 
@@ -10,6 +11,6 @@ struct Player : Unit {
   explicit Player(shared_ptr<Area> area, int health) : Unit(area, health) {
     area->visited = true;
   }
-
-  char name[13] = "Goliath";
+  string name;
+  int dexterity = 1;
 };

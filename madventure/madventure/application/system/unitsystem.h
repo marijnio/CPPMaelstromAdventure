@@ -13,6 +13,8 @@ public:
   shared_ptr<Player> player() { return player_; }
   void SetPlayer(shared_ptr<Player> player) { player_ = player; }
 
+  void TrapPlayer(shared_ptr<Player> player);
+
   // Generic implementation.
   template <typename T>
   void MoveUnit(shared_ptr<T> unit, shared_ptr<Area> destination);
@@ -38,3 +40,4 @@ void UnitSystem::MoveUnit(shared_ptr<T> unit, shared_ptr<Area> destination) {
   // Add the unit to the new location.
   destination->units.push_back(unit);
 }
+

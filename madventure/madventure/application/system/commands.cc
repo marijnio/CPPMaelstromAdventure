@@ -59,7 +59,6 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
     /* Print trap */
     if (area->trap) {
       cout << "A trap is present.\n";
-      cout << area->trap->difficulty << "\n";
     }
   }
 
@@ -109,6 +108,8 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
     } else if (health > 0) {
       cout << "The ship is sinking.\n";
     }
+    cout << "Health: " << health << "\n";
+    cout << "Dexterity: " << player->dexterity << "\n";
   }
 }
 
@@ -162,6 +163,11 @@ void GoCommand::Execute(GameSystem* game_system, vector<string> words) {
     game_system->unit_system()->MoveUnit(player, destination);
     area->level->IncrementTime(1); // Increment level time by one hour
     cout << "Moved " << pronoun << ".\n";
+
+    if (destination->trap) {
+      game_system->unit_system()->TrapPlayer(player);
+    }
+
     // Perform inspect command.
     InspectCommand().Execute(game_system, vector<string>());
     return;

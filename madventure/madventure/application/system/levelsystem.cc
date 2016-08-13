@@ -127,6 +127,9 @@ void LevelSystem::PrintMap(shared_ptr<SparseGraph<NavGraphNode<shared_ptr<Area>>
             } else {
               cout << "v";
             }
+          } else if (it->ExtraInfo()->trap) {
+            // Trap present in area.
+            cout << "t";
           } else {
             cout << "o";
           }

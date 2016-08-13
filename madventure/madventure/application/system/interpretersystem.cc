@@ -96,5 +96,6 @@ map<string, Command*> InterpreterSystem::debug_commands = {
   { "PRINTPATHS", new PrintPathsCommand() },
   { "PRINTMAP", new PrintMapCommand() },
   { "GATEWAY", new DistanceToGatewayCommand() },
-  { "SPANNINGTREE", new SpanningTreeCommand() }
+  { "SPANNINGTREE", new SpanningTreeCommand() },
+  { "DAMAGEPLAYER", new DamagePlayerCommand() }
 };

@@ -1,6 +1,9 @@
 #include "unitsystem.h"
+
 #include <iostream>
 #include <fstream>
+
+#include <math.h>
 
 using namespace std;
 
@@ -17,6 +20,22 @@ shared_ptr<Player> UnitSystem::SpawnPlayer(shared_ptr<Area> destination,
   auto player = make_shared<Player>(destination, health);
   destination->units.push_back(player);
   return player;
+}
+
+void UnitSystem::TrapPlayer(shared_ptr<Player> player) {
+  cout << "It's a trap!\n";
+  auto difficulty = player->area->trap->difficulty;
+  auto dexterity = player->dexterity;
+  auto damage = static_cast<int>(round((8.0 * difficulty)
+    - (8.0 * static_cast<double>(dexterity))));
+  if (damage <= 0) {
+    damage = 0;
+    cout << "Succesfully dismantled the trap.\n";
+  } else {
+    player->health = player->health - damage;
+    cout << "You've been struck by the trap and took " << damage << " damage.\n";
+  }
+  player->area->trap = nullptr;
 }
 
 void UnitSystem::MoveUnit(shared_ptr<Player> unit, shared_ptr<Area> destination) {

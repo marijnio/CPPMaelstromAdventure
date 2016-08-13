@@ -89,16 +89,23 @@ void GameSystem::InjectTraps(shared_ptr<Level> level, double chance,
   auto areas = level_system_->GetAreasInLevel(level);
   vector<shared_ptr<Area>>::iterator it;
   for (it = areas.begin(); it != areas.end(); ++it) {
+
+    // Skip areas containing gateways.
+    if ((*it)->gateway) {
+      continue;
+    }
+
     // Roll for a random number between 0.0 and 1.0.
     double roll = ((double)rand() / (double)RAND_MAX);
 
-    if (roll > chance) {
+    if (roll < chance) {
       // Roll for individual trap difficulty on a normal distribution.
       random_device rd;
       default_random_engine generator;
       generator.seed(rd());
       normal_distribution<double> distribution(average_difficulty, 1.0);
       double difficulty = distribution(generator);
+      cout << difficulty << "\n";
 
       // Insert trap.
       (*it)->trap = make_shared<Trap>(difficulty);
@@ -108,4 +115,8 @@ void GameSystem::InjectTraps(shared_ptr<Level> level, double chance,
 
 void GameSystem::Update() {
   interpreter_system_->Update();
+  if (unit_system_->player()->health <= 0) {
+    cout << "Your ship sinked to the bottom of the ocean.\n";
+    cout << "GAME OVER\n";
+  }
 }

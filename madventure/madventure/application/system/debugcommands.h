@@ -31,3 +31,9 @@ public:
   SpanningTreeCommand() {}
   void Execute(GameSystem* game_system, vector<string> words);
 };
+
+class DamagePlayerCommand : public Command {
+public:
+  DamagePlayerCommand() {}
+  void Execute(GameSystem* game_system, vector<string> words);
+};

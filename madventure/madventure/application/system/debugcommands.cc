@@ -1,6 +1,9 @@
 #include "debugcommands.h"
 
 #include <math.h>
+#include <string>
+#include <algorithm>
+#include <cctype>
 
 #include "gamesystem.h"
 #include "../model/area.h"
@@ -81,4 +84,31 @@ void SpanningTreeCommand::Execute(GameSystem* game_system, vector<string> words)
   for (it = tree.begin(); it != tree.end(); ++it) {
     cout << "Edge " << (*it)->From() << "-" << (*it)->To() << "\n";
   }
+}
+
+// Iterates over the string until it finds a non-digit character.
+// If there are any non-digit characters, the string is considered not a number.
+inline bool IsNumber(const std::string& s) {
+  return !s.empty() && std::find_if(s.begin(),
+    s.end(), [](char c) { return !std::isdigit(c); }) == s.end();
+}
+
+void DamagePlayerCommand::Execute(GameSystem* game_system, vector<string> words) {
+  auto health = game_system->unit_system()->player()->health;
+  int damage = 0;
+  if (words.size() <= 1) {
+    damage = 10;
+  }
+  else if (words.size() > 1) {
+    auto parameter = words.at(1);
+    if (IsNumber(parameter)) {
+      int value = atoi(parameter.c_str());
+      damage = value;
+    } else {
+      cout << "Please enter an integer value.\n";
+      return;
+    }
+  }
+  game_system->unit_system()->player()->health = health - damage;
+  cout << "Damaged the player by " << damage << " points.\n";
 }
