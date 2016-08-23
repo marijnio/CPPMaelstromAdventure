@@ -39,13 +39,21 @@ void UnitSystem::TrapPlayer(shared_ptr<Player> player) {
 }
 
 void UnitSystem::MoveUnit(shared_ptr<Player> unit, shared_ptr<Area> destination) {
-  // Remove the unit from its current location.
-  auto units = unit->area->units;
-  vector<shared_ptr<Unit>>::iterator position = find(units.begin(), units.end(), unit);
-  if (position != units.end()) {
-    units.erase(position);
+  // First, remove the unit from its current location.
+
+  // Copy unit vector from source area.
+  auto source_units = unit->area->units;
+
+  vector<shared_ptr<Unit>>::iterator position = find(source_units.begin(), source_units.end(), unit);
+  if (position != source_units.end()) {
+    // Unit found in source area. Erase.
+    source_units.erase(position);
   }
-  // Update the reference in the unit.
+
+  // Restore updated unit vector onto source area.
+  unit->area->units = source_units;
+
+  // Update the area reference from within the unit.
   unit->area = destination;
 
   // Add the unit to the new location.

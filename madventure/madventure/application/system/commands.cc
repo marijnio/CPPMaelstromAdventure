@@ -55,14 +55,23 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
         cout << "An intense columnar vortex funnels water into the clouds.\n";
       }
     }
+  }
+
+  if (pronoun == subjects.at(1) || default) {
+    /* Print enemies */
+    if (area->units.size() > 1) {
+      if (area->units.size() > 2) {
+        cout << "There are " + to_string(area->units.size() - 1) + " enemies.\n";
+      } else {
+        cout << "There is an enemy.\n";
+      }
+    }
 
     /* Print trap */
     if (area->trap) {
       cout << "A trap is present.\n";
     }
-  }
 
-  if (pronoun == subjects.at(1) || default) {
     /* Print directions */
     vector<string> strings;
     auto neighbors = game_system->level_system()->NeighboringNodeIndexes(area);
