@@ -7,8 +7,11 @@
 using namespace std;
 
 struct Unit {
-  explicit Unit(shared_ptr<Area> area, int health)
+  Unit(shared_ptr<Area> area, int health)
       : area(area), health(health) {}
+
+  // Necessary virtual destructor in order to make this a polymorphic type.
+  virtual ~Unit() {};
 
   shared_ptr<Area> area;
   int health;

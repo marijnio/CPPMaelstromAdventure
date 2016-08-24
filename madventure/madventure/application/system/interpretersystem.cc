@@ -110,7 +110,7 @@ map<string, vector<string>> InterpreterSystem::thesaurus = {
   { "SOUTH", { "GO", "SOUTH" }},
   { "WEST",{ "GO", "WEST" }},
   { "DOWN",{ "GO", "DOWN" }},
-  { "UP",{ "GO", "UP" }}
+  { "UP",{ "GO", "UP" } }
 };
 
 map<string, Command*> InterpreterSystem::debug_commands = {

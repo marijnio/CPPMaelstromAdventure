@@ -121,12 +121,32 @@ void InspectCommand::Execute(GameSystem* game_system, vector<string> words) {
     cout << "Health: " << health << "\n";
     cout << "Dexterity: " << player->dexterity << "\n";
   }
+
+
+  if (pronoun == subjects.at(3)) {
+    /* Print description of all enemies*/
+    auto enemies = UnitSystem::SelectEnemies(player->area->units);
+    for (vector<shared_ptr<Enemy>>::iterator it = enemies.begin(); it != enemies.end(); ++it) {
+      string message;
+      message += "There is a ";
+
+      auto modifier_name = EnemyModifierAsString(it->get()->modifier);
+      if (modifier_name != "NONE") {
+        message += modifier_name + " ";
+      }
+
+      message += EnemyTypeAsString(it->get()->type);
+      message += " with " + to_string(it->get()->health) + " health.\n";
+      cout << message;
+    }
+  }
 }
 
 vector<string> InspectCommand::subjects = {
   "TIME",
   "AREA",
-  "SELF"
+  "SELF",
+  "ENEMIES"
 };
 
 void GoCommand::Execute(GameSystem* game_system, vector<string> words) {

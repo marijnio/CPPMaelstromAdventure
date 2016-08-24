@@ -85,7 +85,24 @@ void GameSystem::InjectUnits(shared_ptr<Level> level) {
     // Insert n enemies based on a Poisson-distribution.
     int n = GetPoisson(0.5);
     while (n > 0) {
-      unit_system_->SpawnEnemy(*it, 100);
+      // Select an enemy type.
+      // Roll for a random number between 0 and the enum count (7) - 1.
+      int r_int = rand() % (7 - 1); // WARNING: this is a cheap usage of random.
+      auto enemy_type = static_cast<EnemyType>(r_int);
+
+      // Select an enemy modifier if lucky
+      auto enemy_modifier = EnemyModifier::NONE;
+      // Roll for a random number between 0.0 and 1.0.
+      double r_double = ((double)rand() / (double)RAND_MAX);
+      double modifier_chance = 0.1;
+      if (r_double < modifier_chance) {
+        // Roll for a random number between 1 and the enum count (6).
+        r_int = rand() % 6 + 1;
+        enemy_modifier = static_cast<EnemyModifier>(r_int);
+      }
+
+      // Spawn the enemy.
+      unit_system_->SpawnEnemy(*it, 100, enemy_type, enemy_modifier);
       n--;
     }
   }

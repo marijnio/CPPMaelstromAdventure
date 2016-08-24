@@ -8,12 +8,17 @@ class UnitSystem {
 public:
   UnitSystem() {};
 
-  shared_ptr<Enemy> SpawnEnemy(shared_ptr<Area>, int health);
+  shared_ptr<Enemy> SpawnEnemy(shared_ptr<Area>, int health,
+                               EnemyType enemy_type,
+                               EnemyModifier enemy_modifier);
   shared_ptr<Player> SpawnPlayer(shared_ptr<Area>, string name, int health);
   shared_ptr<Player> player() { return player_; }
   void SetPlayer(shared_ptr<Player> player) { player_ = player; }
 
   void TrapPlayer(shared_ptr<Player> player);
+
+  static vector<shared_ptr<Enemy>> SelectEnemies(vector<shared_ptr<Unit>> units);
+  static vector<shared_ptr<Player>> SelectPlayers(vector<shared_ptr<Unit>> units);
 
   // Generic implementation.
   template <typename T>

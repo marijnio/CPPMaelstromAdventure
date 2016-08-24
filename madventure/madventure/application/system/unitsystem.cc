@@ -8,8 +8,9 @@
 using namespace std;
 
 shared_ptr<Enemy> UnitSystem::SpawnEnemy(shared_ptr<Area> destination,
-                                         int health) {
-  auto enemy = make_shared<Enemy>(destination, health);
+                                         int health, EnemyType enemy_type,
+                                         EnemyModifier enemy_modifier) {
+  auto enemy = make_shared<Enemy>(destination, health, enemy_type, enemy_modifier);
   destination->units.push_back(enemy);
   //cout << "Spawning enemy in destination " << destination->node_index << ".\n";
   return enemy;
@@ -60,4 +61,30 @@ void UnitSystem::MoveUnit(shared_ptr<Player> unit, shared_ptr<Area> destination)
   destination->units.push_back(unit);
 
   unit->area->visited = true;
+}
+
+vector<shared_ptr<Enemy>> UnitSystem::SelectEnemies(vector<shared_ptr<Unit>> units) {
+  vector<shared_ptr<Enemy>> enemies;
+
+  for (vector<shared_ptr<Unit>>::iterator it = units.begin(); it != units.end(); ++it) {
+    auto unit_pointer = (*it).get(); // Convert shared_ptr to regular pointer.
+    if (dynamic_cast<Enemy*>(unit_pointer) != 0) {
+      // Current unit is a verified enemy.
+      enemies.push_back(dynamic_pointer_cast<Enemy>(*it));
+    }
+  }
+  return enemies;
+}
+
+vector<shared_ptr<Player>> UnitSystem::SelectPlayers(vector<shared_ptr<Unit>> units) {
+  vector<shared_ptr<Player>> players;
+
+  for (vector<shared_ptr<Unit>>::iterator it = units.begin(); it != units.end(); ++it) {
+    auto unit_pointer = (*it).get(); // Convert shared_ptr to regular pointer.
+    if (dynamic_cast<Player*>(unit_pointer) != 0) {
+      // Current unit is a verified player.
+      players.push_back(dynamic_pointer_cast<Player>(*it));
+    }
+  }
+  return players;
 }
